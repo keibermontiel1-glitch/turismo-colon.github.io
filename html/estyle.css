@@ -1,0 +1,675 @@
+/* ==========================================
+   1. VARIABLES Y RESET — Paleta cálida terrosa
+   Configuración de fuentes tipográficas (Fraunces y Outfit) 
+   y definición de variables globales CSS (colores, radios de borde, 
+   sombras, transiciones y tipografías) para un diseño moderno y coherente.
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #f5f0e8;
+  --bg-deep: #ebe3d5;
+  --bg-card: #ffffff;
+  --bg-glass: rgba(255,255,255,0.65);
+  --bg-dark: #1c1a17;
+  --bg-dark-soft: #2a2724;
+  --primary: #c4582b;
+  --primary-dark: #9c3d18;
+  --primary-light: #e07a4f;
+  --primary-pale: #fce8de;
+  --accent: #d4a017;
+  --accent-dark: #a87d0e;
+  --accent-light: #f0c04a;
+  --accent-pale: #fdf5dc;
+  --teal: #2d6e5e;
+  --teal-light: #4a9885;
+  --teal-pale: #e1f0eb;
+  --text: #2a2724;
+  --text-body: #5a5550;
+  --text-muted: #9a938a;
+  --text-light: #b8b0a5;
+  --text-on-dark: #f5f0e8;
+  --text-on-dark-muted: rgba(245,240,232,0.6);
+  --border: #e0d6c6;
+  --border-light: #ece5d8;
+  --shadow-sm: 0 2px 10px rgba(42,39,36,0.06);
+  --shadow-md: 0 8px 30px rgba(42,39,36,0.10);
+  --shadow-lg: 0 20px 50px rgba(42,39,36,0.14);
+  --shadow-xl: 0 30px 70px rgba(42,39,36,0.22);
+  --r-sm: 14px;
+  --r-md: 20px;
+  --r-lg: 28px;
+  --r-xl: 36px;
+  --r-full: 999px;
+  --t: 0.4s cubic-bezier(0.4,0,0.2,1);
+  --t-bounce: 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  --t-slow: 0.7s cubic-bezier(0.4,0,0.2,1);
+  --font-h: 'Fraunces', Georgia, serif;
+  --font-b: 'Outfit', system-ui, sans-serif;
+}
+
+/* Reset global de márgenes, rellenos y modelo de caja */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* Comportamiento de desplazamiento suave en toda la página */
+html { scroll-behavior:smooth; }
+
+/* Estilos base del cuerpo del documento */
+body {
+  font-family: var(--font-b);
+  line-height: 1.65;
+  color: var(--text-body);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  cursor: none; /* Oculta el cursor nativo para dar paso al cursor personalizado */
+}
+
+/* Tipografía y jerarquía para los encabezados */
+h1,h2,h3,h4 { 
+  font-family: var(--font-h); 
+  font-weight: 700; 
+  line-height: 1.15; 
+  letter-spacing: -0.02em; 
+  color: var(--text); 
+}
+
+
+/* ==========================================
+   2. CURSOR PERSONALIZADO
+   Estilos y comportamiento para reemplazar el puntero nativo 
+   por un punto central de alta precisión y un anillo exterior fluido 
+   con efecto de mezcla (difference) y transiciones interactivas.
+   ========================================== */
+.cursor-dot, .cursor-ring {
+  position: fixed; top:0; left:0; pointer-events:none; z-index:99999; border-radius:50%; mix-blend-mode: difference;
+}
+
+/* Punto central pequeño que sigue al cursor instantáneamente */
+.cursor-dot { width:7px; height:7px; background: var(--accent); transition: transform 0.08s ease; }
+
+/* Anillo exterior con animación de expansión y cambio de color al interactuar */
+.cursor-ring {
+  width:36px; height:36px; border:2px solid var(--primary-light);
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+/* Estado activo cuando el cursor pasa sobre elementos interactivos (enlaces, botones) */
+.cursor-ring.hover-active { width:56px; height:56px; border-color: var(--accent); background: rgba(212,160,23,0.12); }
+
+
+/* ==========================================
+   3. LOADING SCREEN (PANTALLA DE CARGA)
+   Estilos de la capa de bienvenida a pantalla completa con fondo oscuro, 
+   animaciones de pulso para el logotipo y barra de progreso animada.
+   ========================================== */
+#loader {
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  background: var(--bg-dark);
+  z-index: 100000; display:flex; align-items:center; justify-content:center; flex-direction:column;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+/* Clase aplicada mediante JavaScript para ocultar el loader al finalizar la carga */
+#loader.hidden { opacity:0; visibility:hidden; }
+
+/* Logotipo animado con efecto de pulso continuo */
+.loader-logo { 
+  font-family: var(--font-h); 
+  font-size: 2.2rem; 
+  font-weight: 900; 
+  color: var(--text-on-dark); 
+  margin-bottom: 20px; 
+  letter-spacing: 0.03em; 
+  animation: loaderPulse 1.4s ease-in-out infinite; 
+}
+
+@keyframes loaderPulse { 
+  0%,100% { opacity:1; transform:scale(1); } 
+  50% { opacity:0.5; transform:scale(0.93); } 
+}
+
+/* Contenedor de la barra de progreso */
+.loader-bar { width:180px; height:3px; background:rgba(255,255,255,0.12); border-radius:2px; overflow:hidden; }
+
+/* Relleno animado de la barra de carga */
+.loader-progress { 
+  width:0; 
+  height:100%; 
+  background: linear-gradient(90deg, var(--accent), var(--accent-light)); 
+  border-radius: 2px; 
+  animation: loaderFill 1.6s ease-in-out forwards; 
+}
+
+@keyframes loaderFill { 
+  to { width:100%; } 
+}
+
+
+/* ==========================================
+   4. PARTÍCULAS DE FONDO
+   ========================================== */
+.particles-bg { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; overflow:hidden; }
+.particle { position:absolute; border-radius:50%; opacity:0; animation: floatParticle linear infinite; }
+@keyframes floatParticle {
+  0% { opacity:0; transform: translateY(100vh) translateX(0); }
+  10% { opacity:0.5; }
+  90% { opacity:0.3; }
+  100% { opacity:0; transform: translateY(-10vh) translateX(var(--drift, 50px)); }
+}
+
+/* ==========================================
+   5. SCROLL PROGRESS (BARRA DE PROGRESO DE DESPLAZAMIENTO)
+   Barra fija en la parte superior que se expande dinámicamente según el scroll 
+   y cuenta con un efecto visual animado tipo brillo (shimmer).
+   ========================================== */
+.scroll-progress { 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 0; 
+  height: 3px; 
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary)); 
+  background-size: 200% 100%; 
+  z-index: 10001; 
+  animation: shimmer 2s linear infinite; 
+}
+
+@keyframes shimmer { 
+  0% { background-position: 0% 0; } 
+  100% { background-position: 200% 0; } 
+}
+
+
+/* ==========================================
+   6. NAVEGACIÓN FLOTANTE TIPO PÍLDORA (FLOAT NAV)
+   Barra de navegación fija y flotante con diseño de píldora, 
+   efecto de difuminado de fondo (backdrop-filter) y enlaces interactivos.
+   ========================================== */
+.float-nav {
+  position: fixed; 
+  top: 20px; 
+  left: 50%; 
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: var(--bg-glass);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: var(--r-full);
+  padding: 8px 8px 8px 20px;
+  display: flex; 
+  align-items: center; 
+  gap: 6px;
+  box-shadow: 0 8px 32px rgba(42,39,36,0.12);
+  transition: var(--t);
+}
+
+/* Sombra más pronunciada al hacer scroll en la página */
+.float-nav.scrolled { 
+  box-shadow: 0 12px 40px rgba(42,39,36,0.18); 
+}
+
+/* Contenedor de la marca / logotipo dentro de la barra de navegación */
+.float-nav .nav-brand {
+  font-family: var(--font-h); 
+  font-weight: 900; 
+  font-size: 1.05rem; 
+  color: var(--text);
+  margin-right: 8px; 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+  white-space: nowrap;
+}
+
+/* Icono animado del logotipo con rotación continua en 3D */
+.float-nav .nav-brand-icon {
+  width: 32px; 
+  height: 32px; 
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(196,88,43,0.3);
+  animation: logoSpin 10s linear infinite;
+}
+
+@keyframes logoSpin { 
+  0% { transform: rotateY(0); } 
+  100% { transform: rotateY(360deg); } 
+}
+
+/* Lista de enlaces del menú */
+.float-nav ul { 
+  display: flex; 
+  list-style: none; 
+  gap: 2px; 
+}
+
+/* Estilos de los enlaces de navegación */
+.float-nav a {
+  color: var(--text-body); 
+  text-decoration: none; 
+  font-weight: 500; 
+  font-size: 0.85rem;
+  padding: 9px 18px; 
+  border-radius: var(--r-full); 
+  transition: var(--t-bounce); 
+  position: relative;
+}
+
+/* Efecto hover interactivo al pasar el cursor sobre los enlaces */
+.float-nav a:hover { 
+  color: var(--primary-dark); 
+  background: var(--primary-pale); 
+  transform: scale(1.05); 
+}
+
+/* Estado activo para indicar la sección actual visible en pantalla */
+.float-nav a.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--text-on-dark);
+  box-shadow: 0 4px 16px rgba(196,88,43,0.35);
+}
+
+
+
+/* ==========================================
+   7. SECCIONES CON SCROLL SNAP
+   ========================================== */
+.page-section { display:none; position:relative; z-index:1; }
+.page-section.active { display:block; animation: sectionIn 0.6s ease; }
+@keyframes sectionIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+/* ==========================================
+   8. HERO — Pantalla completa con split layout
+   ========================================== */
+.hero {
+  position: relative; min-height: 100vh; display:flex; align-items:center;
+  overflow: hidden; background: var(--bg-dark);
+}
+.hero-bg { position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; }
+.hero-slide {
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  opacity:0; transition: opacity 1.5s ease;
+  background-size: cover; background-position: center;
+  transform: scale(1.08);
+}
+.hero-slide.active { opacity:1; animation: heroZoom 8s ease forwards; }
+@keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.14); } }
+.hero-overlay {
+  position:absolute; top:0; left:0; width:100%; height:100%; z-index:1;
+  background: linear-gradient(120deg, rgba(28,26,23,0.85) 0%, rgba(28,26,23,0.5) 50%, rgba(156,61,24,0.35) 100%);
+}
+.hero-content {
+  position: relative; z-index:2; max-width: 760px; padding: 0 8%; color: var(--text-on-dark);
+  animation: heroUp 1s ease-out;
+}
+@keyframes heroUp { from { opacity:0; transform: translateY(40px); } to { opacity:1; transform: translateY(0); } }
+.hero-tag {
+  display:inline-block; padding: 6px 16px; background: rgba(212,160,23,0.2); border:1px solid rgba(212,160,23,0.4);
+  border-radius: var(--r-full); font-size:0.8rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase;
+  color: var(--accent-light); margin-bottom: 24px;
+}
+.hero-content h1 {
+  font-size: 3.6rem; margin-bottom: 20px; color: var(--text-on-dark); font-weight:900; line-height:1.05;
+}
+.hero-content h1 .accent-word { color: var(--accent-light); font-style: italic; }
+.hero-content p { font-size:1.2rem; color: rgba(245,240,232,0.8); margin-bottom: 36px; max-width:560px; font-weight:300; }
+.hero-actions { display:flex; gap:14px; flex-wrap:wrap; }
+.hero-dots {
+  position:absolute; bottom:40px; left:8%; z-index:3; display:flex; gap:10px;
+}
+.hero-dot {
+  width:12px; height:12px; border-radius:50%; background: rgba(255,255,255,0.25);
+  border:2px solid transparent; cursor:none; transition: var(--t-bounce);
+}
+.hero-dot.active { background: var(--accent); border-color: rgba(255,255,255,0.5); transform: scale(1.4); box-shadow: 0 0 16px rgba(212,160,23,0.6); }
+.hero-dot:hover { background: rgba(255,255,255,0.5); }
+.hero-scroll {
+  position:absolute; bottom:30px; right:8%; z-index:3; color: rgba(245,240,232,0.4);
+  font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; writing-mode: vertical-rl;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100% { opacity:0.3; transform: translateY(0); } 50% { opacity:0.8; transform: translateY(6px); } }
+
+/* ==========================================
+   9. SECCIÓN TÍTULOS
+   ========================================== */
+.section-wrap { padding: 80px 0 60px; }
+.section-wrap.alt { background: var(--bg-deep); }
+.container { width:90%; max-width:1200px; margin:0 auto; }
+
+.section-head { margin-bottom: 48px; }
+.section-head .eyebrow {
+  display:inline-flex; align-items:center; gap:8px; font-size:0.8rem; font-weight:600;
+  letter-spacing:0.12em; text-transform:uppercase; color: var(--primary); margin-bottom:14px;
+}
+.section-head .eyebrow::before { content:''; width:30px; height:2px; background: var(--primary); border-radius:2px; }
+.section-head h2 { font-size: 2.8rem; margin-bottom: 12px; }
+.section-head h2 .italic { font-style: italic; color: var(--primary); }
+.section-head p { color: var(--text-muted); font-size:1.05rem; max-width:600px; }
+
+/* ==========================================
+   10. FILTROS TIPO PÍLDORA
+   ========================================== */
+.filter-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 36px; }
+.filter-pill {
+  background: var(--bg-card); border:1.5px solid var(--border); padding: 10px 22px;
+  border-radius: var(--r-full); cursor:none; font-size:0.85rem; font-weight:500;
+  font-family: var(--font-b); color: var(--text-body); transition: var(--t-bounce);
+  box-shadow: var(--shadow-sm); display:flex; align-items:center; gap:6px;
+}
+.filter-pill:hover { border-color: var(--primary-light); color: var(--primary-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.filter-pill.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--text-on-dark);
+  border-color: var(--primary); box-shadow: 0 6px 20px rgba(196,88,43,0.3); transform: scale(1.03);
+}
+
+/* ==========================================
+   11. BENTO GRID — Layout asimétrico
+   ========================================== */
+.bento-grid {
+  display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; margin-bottom: 40px;
+}
+.bento-card {
+  background: var(--bg-card); border-radius: var(--r-md); overflow:hidden;
+  box-shadow: var(--shadow-sm); border:1px solid var(--border-light);
+  transition: var(--t); position:relative; cursor:none;
+  grid-column: span 4;
+}
+.bento-card.large { grid-column: span 6; }
+.bento-card.wide { grid-column: span 8; }
+.bento-card.tall { grid-row: span 2; }
+.bento-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary-light); }
+
+.bento-img { width:100%; height:240px; overflow:hidden; position:relative; background: var(--bg-deep); }
+.bento-card.large .bento-img, .bento-card.wide .bento-img { height: 300px; }
+.bento-img img { width:100%; height:100%; object-fit:cover; transition: transform 0.7s ease; }
+.bento-card:hover .bento-img img { transform: scale(1.1); }
+.bento-img::after {
+  content:''; position:absolute; top:0; left:0; width:100%; height:100%;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.3)); opacity:0; transition: opacity 0.4s ease;
+}
+.bento-card:hover .bento-img::after { opacity:1; }
+.bento-body { padding: 22px; }
+.bento-body h4 { font-size:1.15rem; margin-bottom:8px; transition: var(--t); }
+.bento-card:hover .bento-body h4 { color: var(--primary-dark); }
+.bento-body p { font-size:0.9rem; color: var(--text-muted); }
+.bento-badge {
+  position:absolute; top:14px; right:14px; z-index:5;
+  background: var(--bg-glass); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  padding: 5px 12px; border-radius: var(--r-full); font-size:0.75rem; font-weight:600;
+  color: var(--primary-dark); border:1px solid rgba(255,255,255,0.5);
+}
+.bento-btn {
+  margin-top: 14px; background: var(--bg-deep); border:none; padding: 9px 18px;
+  border-radius: var(--r-sm); font-family: var(--font-b); font-weight:500; font-size:0.82rem;
+  color: var(--primary-dark); cursor:none; transition: var(--t); display:inline-flex; align-items:center; gap:6px;
+}
+.bento-btn:hover { background: var(--primary); color: var(--text-on-dark); transform: translateX(4px); }
+
+/* ==========================================
+   12. FLIP CARDS — Tarjetas que se voltean
+   ========================================== */
+.flip-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:22px; }
+.flip-card { perspective: 1200px; height: 380px; cursor:none; }
+.flip-inner {
+  position:relative; width:100%; height:100%; transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-inner, .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+.flip-front, .flip-back {
+  position:absolute; top:0; left:0; width:100%; height:100%; backface-visibility:hidden;
+  -webkit-backface-visibility:hidden; border-radius: var(--r-md); overflow:hidden;
+}
+.flip-front {
+  background: var(--bg-card); border:1px solid var(--border-light); box-shadow: var(--shadow-sm);
+}
+.flip-front .flip-img { width:100%; height:240px; overflow:hidden; background: var(--bg-deep); }
+.flip-front .flip-img img { width:100%; height:100%; object-fit:cover; }
+.flip-front .flip-body { padding: 20px; }
+.flip-front .flip-body h4 { font-size:1.1rem; margin-bottom:6px; }
+.flip-front .flip-body p { font-size:0.88rem; color: var(--text-muted); }
+.flip-hint {
+  position:absolute; bottom:14px; right:14px; font-size:0.7rem; color: var(--text-light);
+  display:flex; align-items:center; gap:4px; letter-spacing:0.05em;
+}
+.flip-back {
+  background: linear-gradient(135deg, var(--bg-dark), var(--bg-dark-soft));
+  color: var(--text-on-dark); padding: 28px; transform: rotateY(180deg);
+  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+  box-shadow: var(--shadow-lg);
+}
+.flip-back h4 { color: var(--accent-light); font-size:1.3rem; margin-bottom:14px; font-style:italic; }
+.flip-back p { font-size:0.9rem; color: rgba(245,240,232,0.75); line-height:1.7; margin-bottom: 20px; }
+.flip-back .flip-btn {
+  background: var(--accent); color: var(--bg-dark); border:none; padding: 11px 24px;
+  border-radius: var(--r-full); font-family: var(--font-b); font-weight:600; font-size:0.85rem;
+  cursor:none; transition: var(--t-bounce);
+}
+.flip-back .flip-btn:hover { background: var(--accent-light); transform: scale(1.08); box-shadow: 0 6px 20px rgba(212,160,23,0.4); }
+
+/* ==========================================
+   13. CARRUSEL HORIZONTAL
+   ========================================== */
+.carousel { position:relative; margin-bottom: 40px; }
+.carousel-head { display:flex; justify-content:space-between; align-items:center; margin-bottom: 18px; }
+.carousel-head h3 { font-size:1.4rem; color: var(--text); }
+.carousel-head h3 .italic { font-style:italic; color: var(--primary); }
+.carousel-nav { display:flex; gap:8px; }
+.carousel-nav button {
+  width:44px; height:44px; border-radius:50%; border:1.5px solid var(--border);
+  background: var(--bg-card); cursor:none; font-size:1.1rem; color: var(--text-body);
+  transition: var(--t-bounce); display:flex; align-items:center; justify-content:center;
+}
+.carousel-nav button:hover {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--text-on-dark);
+  border-color: var(--primary); transform: scale(1.1); box-shadow: 0 6px 18px rgba(196,88,43,0.3);
+}
+.carousel-track {
+  display:flex; gap:20px; overflow-x:auto; scroll-behavior:smooth; scroll-snap-type:x mandatory;
+  padding: 8px 0 16px; scrollbar-width:none; -ms-overflow-style:none; perspective:1000px;
+}
+.carousel-track::-webkit-scrollbar { display:none; }
+.carousel-track > .flip-card { flex: 0 0 300px; scroll-snap-align: center; }
+.carousel-track > .bento-card { flex: 0 0 300px; scroll-snap-align: center; }
+
+/* ==========================================
+   14. ACORDEÓN MEJORADO
+   ========================================== */
+.accordion { display:flex; flex-direction:column; gap:14px; }
+.acc-item {
+  background: var(--bg-card); border:1px solid var(--border); border-radius: var(--r-md);
+  overflow:hidden; transition: var(--t); box-shadow: var(--shadow-sm);
+}
+.acc-item:hover { box-shadow: var(--shadow-md); border-color: var(--primary-light); }
+.acc-btn {
+  width:100%; padding: 22px 26px; text-align:left; background:none; border:none;
+  font-size:1.15rem; font-weight:700; font-family: var(--font-h); color: var(--text);
+  cursor:none; display:flex; justify-content:space-between; align-items:center; transition: var(--t);
+}
+.acc-btn:hover { background: linear-gradient(135deg, var(--primary-pale), var(--accent-pale)); }
+.acc-btn.active { background: linear-gradient(135deg, var(--primary-pale), var(--accent-pale)); color: var(--primary-dark); }
+.acc-icon {
+  width:34px; height:34px; border-radius:50%; background: var(--primary-pale);
+  display:flex; align-items:center; justify-content:center; transition: var(--t-bounce);
+  color: var(--primary); font-size:0.8rem; flex-shrink:0;
+}
+.acc-btn.active .acc-icon { background: var(--primary); color: var(--text-on-dark); transform: rotate(180deg); }
+.acc-content { display:none; padding: 24px 26px; border-top:1px solid var(--border); background: linear-gradient(180deg, var(--bg), var(--bg-deep)); }
+
+/* ==========================================
+   15. PANEL LATERAL DESLIZANTE (DRAWER)
+   ========================================== */
+.drawer-overlay {
+  position:fixed; top:0; left:0; width:100vw; height:100vh; background: rgba(28,26,23,0.5);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index:9998;
+  opacity:0; visibility:hidden; transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.drawer-overlay.active { opacity:1; visibility:visible; }
+
+.drawer {
+  position:fixed; top:0; right:-540px; width:520px; max-width:92vw; height:100vh;
+  background: var(--bg-card); z-index:9999; box-shadow: -12px 0 50px rgba(28,26,23,0.25);
+  transition: right 0.5s cubic-bezier(0.4,0,0.2,1); overflow-y:auto; display:flex; flex-direction:column;
+}
+.drawer.active { right:0; }
+.drawer-header {
+  padding: 24px 28px 16px; position:sticky; top:0; background: var(--bg-card); z-index:10;
+  border-bottom: 1px solid var(--border); display:flex; justify-content:space-between; align-items:flex-start;
+}
+.drawer-header h3 { font-size:1.5rem; color: var(--text); padding-right:40px; }
+.drawer-close {
+  background: var(--bg-deep); border:none; width:38px; height:38px; border-radius:50%;
+  font-size:1.5rem; cursor:none; color: var(--text-muted); transition: var(--t-bounce);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.drawer-close:hover { background: var(--primary); color: var(--text-on-dark); transform: rotate(90deg) scale(1.1); }
+.drawer-body { padding: 24px 28px 40px; }
+.drawer-gallery-wrap { position:relative; margin-bottom: 24px; border-radius: var(--r-md); overflow:hidden; }
+.drawer-gallery { width:100%; display:flex; justify-content:center; }
+.drawer-gallery img { width:100%; max-width:460px; height:320px; object-fit:cover; border-radius: var(--r-md); display:none; animation: drawerImgFade 0.4s ease; }
+.drawer-gallery img.active { display:block; }
+@keyframes drawerImgFade { from { opacity:0.5; transform: scale(0.97); } to { opacity:1; transform: scale(1); } }
+.drawer-gallery-btn {
+  position:absolute; top:50%; transform: translateY(-50%); background: rgba(28,26,23,0.7);
+  color: var(--text-on-dark); border:none; width:42px; height:42px; border-radius:50%; cursor:none;
+  z-index:5; display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+  transition: var(--t-bounce); backdrop-filter: blur(8px);
+}
+.drawer-gallery-btn:hover { background: var(--primary); transform: translateY(-50%) scale(1.2); }
+.drawer-gallery-btn.prev { left:12px; }
+.drawer-gallery-btn.next { right:12px; }
+.drawer-text { white-space: pre-line; color: var(--text-body); font-size:0.95rem; line-height:1.8; }
+.drawer-counter { text-align:center; font-size:0.8rem; color: var(--text-muted); margin-top:10px; }
+
+/* ==========================================
+   16. DETALLE DE DESTINO (vista inline)
+   ========================================== */
+.dest-detail {
+  display:none; background: var(--bg-card); border-radius: var(--r-lg); overflow:hidden;
+  box-shadow: var(--shadow-md); border:1px solid var(--border-light);
+}
+.dest-detail.active { display:grid; grid-template-columns: 1fr 1fr; animation: detailIn 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes detailIn { from { opacity:0; transform: translateY(20px) scale(0.97); } to { opacity:1; transform: translateY(0) scale(1); } }
+.dest-detail-img { height:100%; min-height:340px; overflow:hidden; background: var(--bg-deep); }
+.dest-detail-img img { width:100%; height:100%; object-fit:cover; }
+.dest-detail-body { padding: 36px; display:flex; flex-direction:column; justify-content:center; }
+.dest-detail-body h4 { font-size:1.8rem; margin-bottom:12px; color: var(--text); }
+.dest-detail-body p { font-size:1rem; color: var(--text-body); margin-bottom:20px; }
+.dest-chips { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px; }
+.dest-chip {
+  background: var(--bg-deep); border:1px solid var(--border); padding:8px 16px;
+  border-radius: var(--r-full); font-size:0.82rem; font-weight:500; color: var(--text-body);
+  cursor:none; transition: var(--t-bounce);
+}
+.dest-chip:hover { border-color: var(--primary-light); color: var(--primary-dark); transform: scale(1.03); }
+.dest-chip.active { background: var(--primary); color: var(--text-on-dark); border-color: var(--primary); }
+.dest-detail-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top: 8px; }
+.dest-action-btn {
+  background: var(--bg-deep); border:1px solid var(--border); padding: 11px 20px;
+  border-radius: var(--r-sm); font-family: var(--font-b); font-weight:500; font-size:0.85rem;
+  color: var(--primary-dark); cursor:none; transition: var(--t); text-align:left;
+}
+.dest-action-btn:hover { background: var(--primary); color: var(--text-on-dark); border-color: var(--primary); transform: translateX(4px); }
+
+/* ==========================================
+   17. BOTONES
+   ========================================== */
+.btn {
+  display:inline-flex; align-items:center; gap:8px; padding:14px 30px; border:none;
+  border-radius: var(--r-full); font-weight:600; font-size:0.9rem; cursor:none;
+  text-decoration:none; transition: var(--t); font-family: var(--font-b); position:relative; overflow:hidden;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--text-on-dark);
+  box-shadow: 0 6px 24px rgba(196,88,43,0.35);
+}
+.btn-primary::before {
+  content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.6s ease;
+}
+.btn-primary:hover::before { left:100%; }
+.btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 36px rgba(196,88,43,0.5); }
+.btn-ghost {
+  background: rgba(255,255,255,0.1); color: var(--text-on-dark); border:1px solid rgba(255,255,255,0.25);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+/* ==========================================
+   18. SCROLL REVEAL
+   ========================================== */
+.reveal { opacity:0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.4,0,0.2,1); }
+.reveal.visible { opacity:1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+
+/* ==========================================
+   19. FOOTER
+   ========================================== */
+.footer {
+  position:relative; background: var(--bg-dark); color: rgba(245,240,232,0.7);
+  text-align:center; padding: 56px 0 36px; overflow:hidden; z-index:1;
+}
+.footer::before {
+  content:''; position:absolute; top:0; left:0; width:200%; height:100%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(212,160,23,0.1), transparent 60%);
+  animation: footerGlow 6s ease-in-out infinite;
+}
+@keyframes footerGlow { 0%,100% { transform: translateX(-25%); } 50% { transform: translateX(0%); } }
+.footer p { font-size:0.85rem; color: rgba(245,240,232,0.5); position:relative; z-index:1; }
+.footer-wave { position:absolute; top:-1px; left:0; width:100%; line-height:0; }
+.footer-wave svg { width:100%; height:50px; display:block; }
+.footer-wave path { fill: var(--bg); }
+.footer-brand { font-family: var(--font-h); font-size:1.4rem; font-weight:900; color: var(--text-on-dark); margin-bottom:10px; position:relative; z-index:1; }
+
+/* ==========================================
+   20. RESPONSIVIDAD
+   ========================================== */
+@media (max-width: 900px) {
+  .bento-card, .bento-card.large, .bento-card.wide { grid-column: span 6; }
+  .bento-card.tall { grid-row: span 1; }
+  .dest-detail.active { grid-template-columns: 1fr; }
+  .dest-detail-img { min-height: 240px; }
+}
+@media (max-width: 768px) {
+  body { cursor:auto; }
+  .cursor-dot, .cursor-ring { display:none; }
+  .btn, .carousel-nav button, .drawer-close, .drawer-gallery-btn, .filter-pill,
+  .dest-chip, .dest-action-btn, .acc-btn, .hero-dot, .flip-card, .bento-card { cursor:pointer; }
+
+  .float-nav { padding: 6px 6px 6px 14px; top: 12px; }
+  .float-nav .nav-brand { font-size:0.9rem; }
+  .float-nav .nav-brand-icon { width:28px; height:28px; font-size:0.85rem; }
+  .float-nav a { padding: 7px 12px; font-size:0.78rem; }
+
+  .hero-content h1 { font-size: 2.2rem; }
+  .hero-content p { font-size: 1.05rem; }
+  .hero-scroll { display:none; }
+
+  .section-head h2 { font-size: 2rem; }
+  .section-wrap { padding: 56px 0 40px; }
+
+  .bento-card, .bento-card.large, .bento-card.wide { grid-column: span 12; }
+  .flip-grid { grid-template-columns: 1fr; }
+  .carousel-track > .flip-card, .carousel-track > .bento-card { flex: 0 0 85%; }
+
+  .drawer { width: 100vw; right:-100vw; }
+  .drawer.active { right:0; }
+  .drawer-gallery img { height: 240px; }
+}
+
+/* Oculta por defecto todos los subpaneles */
+.sub-panel {
+  display: none;
+}
+
+/* Muestra únicamente el subpanel que tenga la clase active */
+.sub-panel.active {
+  display: block; /* o grid/flex según requiera tu diseño */
+}

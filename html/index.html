@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turismo Colón</title>
+  <link rel="stylesheet" href="estyle.css">
+</head>
+<body>
+
+  <!-- ==========================================
+     PANTALLA DE CARGA (LOADER)
+     Muestra un logo y una barra de progreso mientras 
+     la página web termina de cargar sus recursos.
+     ========================================== -->
+  <div id="loader">
+    <div class="loader-logo">Turismo Colón</div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+  </div>
+
+  <!-- ==========================================
+     CURSOR PERSONALIZADO
+     Elementos gráficos que reemplazan el cursor nativo
+     para brindar un efecto visual moderno (un punto y un anillo).
+     ========================================== -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- ==========================================
+     BARRA DE PROGRESO DE DESPLAZAMIENTO (SCROLL)
+     Indica visualmente qué porcentaje de la página 
+     ha recorrido el usuario al hacer scroll.
+     ========================================== -->
+  <div class="scroll-progress"></div>
+
+  <!-- ==========================================
+     FONDO DE PARTÍCULAS
+     Contenedor dinámico para efectos visuales de fondo.
+     ========================================== -->
+  <div class="particles-bg" id="particles-bg"></div>
+
+  <!-- ==========================================
+     NAVEGACIÓN FLOTANTE TIPO PÍLDORA
+     Menú principal fijo con la identidad de la marca 
+     y enlaces directos a las secciones de la página.
+     ========================================== -->
+  <nav class="float-nav" id="floatNav">
+    <div class="nav-brand">
+      <div class="nav-brand-icon">&#127758;</div> <!-- Icono de globo terráqueo -->
+      Turismo Colón
+    </div>
+    <ul>
+      <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+      <li><a href="#destinos" class="nav-link">Destinos</a></li>
+      <li><a href="#gastronomia" class="nav-link">Gastronomía</a></li>
+      <li><a href="#alojamiento" class="nav-link">Alojamiento</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- ==========================================
+         SECCIÓN INICIO — HERO SPLIT
+         Sección principal de bienvenida (Landing Page).
+         Contiene un carrusel de imágenes de fondo dinámicas,
+         un título llamativo, descripción del Municipio Colón (Zulia),
+         botones de acción rápida y controles de navegación del hero.
+         ========================================== -->
+    <section id="inicio" class="page-section active">
+      <div class="hero">
+        
+        <!-- Contenedor de imágenes de fondo deslizantes (Slider) -->
+        <div class="hero-bg">
+          <div class="hero-slide active" style="background-image: url('https://images.pexels.com/photos/1457600/pexels-photo-1457600.jpeg?auto=compress&cs=tinysrgb&h=650&w=940');"></div>
+          <div class="hero-slide" style="background-image: url('https://images.pexels.com/photos/34407127/pexels-photo-34407127.jpeg?auto=compress&cs=tinysrgb&h=650&w=940');"></div>
+          <div class="hero-slide" style="background-image: url('https://images.pexels.com/photos/9850300/pexels-photo-9850300.jpeg?auto=compress&cs=tinysrgb&h=650&w=940');"></div>
+          <div class="hero-slide" style="background-image: url('https://images.pexels.com/photos/7950136/pexels-photo-7950136.jpeg?auto=compress&cs=tinysrgb&h=650&w=940');"></div>
+        </div>
+
+        <!-- Capa de oscurecimiento para mejorar la legibilidad del texto sobre el fondo -->
+        <div class="hero-overlay"></div>
+
+        <!-- Contenido textual y llamadas a la acción principales -->
+        <div class="hero-content">
+          <span class="hero-tag">Municipio Colón · Zulia</span>
+          <h1>Descubre la magia de <span class="accent-word">San Carlos</span> y Santa Bárbara del Zulia</h1>
+          <p>Explora monumentos históricos, la mejor gastronomía local, áreas recreativas y opciones de hospedaje en el corazón del Sur del Lago.</p>
+          
+          <!-- Botones de navegación interna -->
+          <div class="hero-actions">
+            <a href="#destinos" class="btn btn-primary nav-link">Explorar Destinos &#8594;</a>
+            <a href="#gastronomia" class="btn btn-ghost nav-link">Sabores Locales</a>
+          </div>
+        </div>
+
+        <!-- Puntos indicadores (dots) para controlar manualmente el carrusel de imágenes -->
+        <div class="hero-dots">
+          <span class="hero-dot active" data-slide="0"></span>
+          <span class="hero-dot" data-slide="1"></span>
+          <span class="hero-dot" data-slide="2"></span>
+          <span class="hero-dot" data-slide="3"></span>
+        </div>
+
+        <!-- Indicador visual para invitar al usuario a hacer scroll hacia abajo -->
+        <div class="hero-scroll">Desliza</div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+     SECCIÓN DESTINOS — BENTO + DETAIL + CAROUSEL
+     Sección interactiva estructurada mediante subpaneles,
+     fichas detalladas y carruseles bento por categorías.
+     ========================================== -->
+    <section id="destinos" class="page-section">
+      <div class="section-wrap">
+        <div class="container">
+          
+          <!-- Encabezado principal de la sección -->
+          <div class="section-head reveal">
+            <span class="eyebrow">Lugares emblemáticos</span>
+            <h2>Destinos <span class="italic">Tursticos</span></h2>
+            <p>Selecciona una categoria para explorar los lugares mas representativos del Municipio Colon.</p>
+          </div>
+
+          <!-- BARRA DE FILTROS PRINCIPALES (Barra de Píldoras)
+               Alterna la visibilidad entre los subpaneles principales vía JS (data-sub) -->
+          <div class="filter-bar reveal reveal-d1">
+            <button class="filter-pill active" data-sub="dest-catedrales-monumentos">&#128205; Catedrales y Monumentos</button>
+            <button class="filter-pill" data-sub="dest-plazas-parques">&#127807; Plazas y Parques</button>
+            <button class="filter-pill" data-sub="dest-industrias">&#127981; Industrias</button>
+          </div>
+
+          <!-- ==========================================
+               SUB-PANEL 1: Catedrales y Monumentos
+               Muestra un selector de etiquetas (chips) y 
+               tarjetas con vista de detalle dinámico.
+               ========================================== -->
+          <div id="dest-catedrales-monumentos" class="sub-panel active">
+            
+            <!-- Selector de etiquetas (Chips) para alternar los detalles del sitio -->
+            <div class="dest-chips reveal">
+              <button class="dest-chip active" data-target="catedral-santa-barbara">Catedral San Carlos Borromeo</button>
+              <button class="dest-chip" data-target="iglesia-san-carlos">Iglesia Santa Barbara del Zulia</button>
+              <button class="dest-chip" data-target="unesur">UNESUR</button>
+              <button class="dest-chip" data-target="rio-escalante">Rio Escalante</button>
+              <button class="dest-chip" data-target="paseo-colon">Paseo Colon</button>
+              <button class="dest-chip" data-target="teatro-chavez">Teatro Municipal</button>
+            </div>
+
+            <!-- Ficha 1: Catedral de San Carlos del Zulia -->
+            <div class="dest-detail active" id="catedral-santa-barbara">
+              <div class="dest-detail-img"><img src="san carlos1.jpg" alt="Catedral de Santa Barbara del Zulia" loading="lazy"></div>
+              <div class="dest-detail-body">
+                <h4>Catedral de San Carlos del Zulia</h4>
+                <p>Sede de la Diocesis de El Vigia - San Carlos del Zulia y epicentro de la devocion mariana y patronal del municipio.</p>
+                <div class="dest-detail-actions">
+                  <button class="dest-action-btn" data-modal-id="catedral-santa-barbara">Ver Historia y Servicios &#8594;</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ficha 2: Iglesia de Santa Bárbara -->
+            <div class="dest-detail" id="iglesia-san-carlos">
+              <div class="dest-detail-img"><img src="iglesia1.jpg" alt="Iglesia San Carlos Borromeo" loading="lazy"></div>
+              <div class="dest-detail-body">
+                <h4>Iglesia de Santa Barbara</h4>
+                <p>Templo historico y patrimonial, simbolo del origen y las tradiciones socioculturales de San Carlos del Zulia.</p>
+                <div class="dest-detail-actions">
+                  <button class="dest-action-btn" data-modal-id="iglesia-san-carlos">Ver Historia y Servicios &#8594;</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ficha 3: UNESUR (Universidad) -->
+            <div class="dest-detail" id="unesur">
+              <div class="dest-detail-img"><img src="unesur1.jpg" alt="Fachada UNESUR" loading="lazy"></div>
+              <div class="dest-detail-body">
+                <h4>Universidad Nacional Experimental Sur del Lago (UNESUR)</h4>
+                <p>Principal complejo universitario del municipio Colon, centrado en el desarrollo academico, cientifico e industrial de la region.</p>
+                <!-- Accesos directos a modales de sub-áreas universitarias -->
+                <div class="dest-detail-actions">
+                  <button class="dest-action-btn" data-modal-id="unesur-central">Area Central &#8594;</button>
+                  <button class="dest-action-btn" data-modal-id="unesur-biblioteca">Biblioteca Central &#8594;</button>
+                  <button class="dest-action-btn" data-modal-id="unesur-enfermeria">Area de Enfermeria &#8594;</button>
+                  <button class="dest-action-btn" data-modal-id="unesur-jardineria">Area de Jardineria &#8594;</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ficha 4: Río Escalante -->
+            <div class="dest-detail" id="rio-escalante">
+              <div class="dest-detail-img"><img src="rio1.jpg" alt="Rio Escalante" loading="lazy"></div>
+              <div class="dest-detail-body">
+                <h4>Rio Escalante</h4>
+                <p>Arteria fluvial historica y geografica que divide y une geograficamente a Santa Barbara y San Carlos del Zulia.</p>
+                <div class="dest-detail-actions">
+                  <button class="dest-action-btn" data-modal-id="rio-escalante">Ver Informacion Detallada &#8594;</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ficha 5: Paseo Colón -->
+            <div class="dest-detail" id="paseo-colon">
+              <div class="dest-detail-img"><img src="paseo1.jpg" alt="Paseo Colon" loading="lazy"></div>
+              <div class="dest-detail-body">
+                <h4>Paseo Colon</h4>
+                <p>Espacio peatonal y recreativo a orillas del rio, ideal para el esparcimiento familiar, caminatas y eventos comunitarios.</p>
+                <div class="dest-detail-actions">
+                  <button class="dest-action-btn" data-modal-id="paseo-colon">Ver Informacion Detallada &#8594;</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ficha 6: Teatro Municipal -->
+            <div class="dest-detail" id="teatro-chavez">
+              <div class="dest-detail-img"><img src="teatro1.jpg" alt="Teatro Municipal" loading="lazy"></div>
+              <div class="dest-detail-body">
+                <h4>Teatro Municipal Hugo Rafael Chavez Frias</h4>
+                <p>Centro cultural y escenario principal de eventos sinfonicos y artisticos del municipio Colon.</p>
+                <div class="dest-detail-actions">
+                  <button class="dest-action-btn" data-modal-id="teatro-chavez">Ver Informacion Detallada &#8594;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==========================================
+               SUB-PANEL 2: Plazas y Parques
+               Organizado mediante carruseles deslizantes (Bento style).
+               ========================================== -->
+          <div id="dest-plazas-parques" class="sub-panel">
+            
+            <!-- Carrusel 1: Plazas Principales -->
+            <div class="carousel reveal">
+              <div class="carousel-head">
+                <h3>Plazas <span class="italic">Principales</span></h3>
+                <div class="carousel-nav">
+                  <button class="carousel-prev" aria-label="Anterior">&#10094;</button>
+                  <button class="carousel-next" aria-label="Siguiente">&#10095;</button>
+                </div>
+              </div>
+              <div class="carousel-track">
+                <!-- Tarjeta Bento: Plaza Bolívar -->
+                <article class="bento-card">
+                  <div class="bento-img"><img src="plaza bolivar1.jpg" alt="Plaza Bolivar" loading="lazy"></div>
+                  <div class="bento-body">
+                    <h4>Plaza Bolivar</h4>
+                    <p>Espacio concurrido por los habitantes locales para conversar y pasear cerca de la iglesia principal.</p>
+                    <button class="bento-btn" data-modal-id="plaza-bolivar">Ver Detalles &#8594;</button>
+                  </div>
+                </article>
+                <!-- Tarjeta Bento: Plaza Rafael Urdaneta -->
+                <article class="bento-card">
+                  <div class="bento-img"><img src="plaza rafael2.jpg" alt="Plaza Rafael Urdaneta" loading="lazy"></div>
+                  <div class="bento-body">
+                    <h4>Plaza Rafael Urdaneta</h4>
+                    <p>Parque urbano muy visitado que cuenta con areas recreativas y fuentes de agua.</p>
+                    <button class="bento-btn" data-modal-id="plaza-urdaneta">Ver Detalles &#8594;</button>
+                  </div>
+                </article>
+                <!-- Tarjeta Bento: Plaza José María Vargas -->
+                <article class="bento-card">
+                  <div class="bento-img"><img src="medico1.jfif" alt="Plaza Jose Maria Vargas" loading="lazy"></div>
+                  <div class="bento-body">
+                    <h4>Plaza Jose Maria Vargas (Plaza del Medico)</h4>
+                    <p>Destaca por sus labores de mantenimiento, iluminacion y reactivacion de espacios ornamentales.</p>
+                    <button class="bento-btn" data-modal-id="plaza-vargas">Ver Detalles &#8594;</button>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Carrusel 2: Parques y Reservas Naturales -->
+            <div class="carousel reveal">
+              <div class="carousel-head">
+                <h3>Parques y <span class="italic">Reservas Naturales</span></h3>
+                <div class="carousel-nav">
+                  <button class="carousel-prev" aria-label="Anterior">&#10094;</button>
+                  <button class="carousel-next" aria-label="Siguiente">&#10095;</button>
+                </div>
+              </div>
+              <div class="carousel-track">
+
+                
+                <!-- Tarjeta Bento: Ciénagas de Juan Manuel -->
+                <article class="bento-card">
+                  <div class="bento-img"><img src="parque1.jpg" alt="Parque Nacional Cienagas de Juan Manuel" loading="lazy"></div>
+                  <div class="bento-body">
+                    <h4>Parque Nacional Cienagas de Juan Manuel</h4>
+                    <p>Santuario ecologico y ecosistema de cienagas famoso por albergar el fenomeno del Relampago del Catatumbo.</p>
+                    <button class="bento-btn" data-modal-id="parque-cienegas">Ver Detalles &#8594;</button>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==========================================
+               SUB-PANEL 3: Industrias y Sector Agropecuario
+               Muestra empresas productoras, suministros y gremios en carruseles.
+               ========================================== -->
+          <div id="dest-industrias" class="sub-panel">
+            
+            <!-- Carrusel 1: Grandes Empresas Productoras -->
+            <div class="carousel reveal">
+              <div class="carousel-head">
+                <h3>Grandes <span class="italic">Empresas Productoras</span></h3>
+                <div class="carousel-nav">
+                  <button class="carousel-prev" aria-label="Anterior">&#10094;</button>
+                  <button class="carousel-next" aria-label="Siguiente">&#10095;</button>
+                </div>
+              </div>
+              <div class="carousel-track">
+                <!-- Agropecuaria San Simón -->
+                <article class="bento-card">
+                  <div class="bento-img"><img src="san simon2.png" alt="Agropecuaria San Simon" loading="lazy"></div>
+                  <div class="bento-body">
+                    <h4>Agropecuaria San Simon</h4>
+                    <p>Pilar del consorcio San Simon, con ganaderia de doble proposito y cultivo de palma africana aceitera.</p>
+                    <button class="bento-btn" data-modal-id="ind-san-simon">Ver Detalles &#8594;</button>
+                  </div>
+                </article>
+                <!-- Genica del Zulia -->
+                <article class="bento-card">
+                  <div class="bento-img"><img src="colona1.jpg" alt="Genica del Zulia" loading="lazy"></div>
+                  <div class="bento-body">
+                    <h4>Genica del Zulia (Planta Santa Barbara, Colona)</h4>
+                    <p>Esquema de produccion integrada que procesa la leche de cientos de fincas ganaderas de la zona.</p>
+                    <button class="bento-btn" data-modal-id="ind-genica">Ver Detalles &#8594;</button>
+                  </div>
+                </article>
+                <!-- Frigorífico Industrial Santa Bárbara (FRISULCA) -->
+                <article class="bento-card">
+                  <div class="bento-img"><img src="fibasa1.png" alt="Frigorifico Industrial Santa Barbara" loading="lazy"></div>
+                  <div class="bento-body">
+                    <h4>Frigorifico Industrial Santa Barbara (FRISULCA)</h4>
+                    <p>Matadero industrial y centro de beneficio de reses de alta capacidad para distribucion carnica nacional.</p>
+                    <button class="bento-btn" data-modal-id="ind-frisulca">Ver Detalles &#8594;</button>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Carrusel 2: Suministros Agropecuarios -->
+            <div class="carousel reveal">
+              <div class="carousel-head">
+                <h3>Suministros <span class="italic">Agropecuarios</span></h3>
+                <div class="carousel-nav">
+                  <button class="carousel-prev" aria-label="Anterior">&#10094;</button>
+                  <button class="carousel-next" aria-label="Siguiente">&#10095;</button>
+                </div>
+              </div>
+              <div class="carousel-track">
+                <!-- Proseagro -->
+                <article class="bento-card">
+                  <div class="bento-img"><img src="proseagro1.jpg" alt="Proseagro, C.A." loading="lazy"></div>
+                  <div class="bento-body">
+                    <h4>Proseagro, C.A.</h4>
+                    <p>Distribuidor de insumos agropecuarios, medicamentos veterinarios y alimentos balanceados en el Edificio AGANACO.</p>
+                    <button class="bento-btn" data-modal-id="ind-proseagro">Ver Detalles &#8594;</button>
+                  </div>
+                </article>
+                <!-- Agrollano -->
+                <article class="bento-card">
+                  <div class="bento-img"><img src="agro3.png" alt="Agrollano Sucursal Santa Barbara" loading="lazy"></div>
+                  <div class="bento-body">
+                    <h4>Agrollano (Sucursal Santa Barbara)</h4>
+                    <p>Centro de distribucion de fertilizantes, semillas certificadas, agroquimicos y financiamiento tecnico.</p>
+                    <button class="bento-btn" data-modal-id="ind-agrollano">Ver Detalles &#8594;</button>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Carrusel 3: Entidades de Respaldo Gremial -->
+            <div class="carousel reveal">
+              <div class="carousel-head">
+                <div class="carousel-nav">
+                  <button class="carousel-prev" aria-label="Anterior">&#10094;</button>
+                  <button class="carousel-next" aria-label="Siguiente">&#10095;</button>
+                </div>
+              </div>
+              <div class="carousel-track">     
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SECCIÓN GASTRONOMÍA — FLIP CARDS + ACORDEÓN
+         ========================================== -->
+    <section id="gastronomia" class="page-section">
+      <div class="section-wrap alt">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Sabores del Sur del Lago</span>
+            <h2>Gastronomia y <span class="italic">Sabores Locales</span></h2>
+            <p>Explora la tradicion culinaria, platos autoctonos y la oferta gastronomica del Municipio Colon. </p>
+          </div>
+
+          <div class="accordion">
+            <div class="acc-item reveal">
+              <button class="acc-btn">Platos Tipicos de la Zona <span class="acc-icon">&#9660;</span></button>
+              <div class="acc-content">
+                <div class="carousel" style="margin-top:18px;">
+                  <div class="carousel-head">
+                    <h3>Platos <span class="italic">Principales</span></h3>
+                    <div class="carousel-nav">
+                      <button class="carousel-prev">&#10094;</button>
+                      <button class="carousel-next">&#10095;</button>
+                    </div>
+                  </div>
+                  <div class="carousel-track">
+                    <div class="flip-card">
+                      <div class="flip-inner">
+                        <div class="flip-front">
+                          <div class="flip-img"><img src="hallaca1.jpg" alt="Hallaca de platano verde" loading="lazy"></div>
+                          <div class="flip-body"><h4>Hallaca de Platano Verde</h4><p>Masa de platano verde rallado, guiso de carne y envoltura en hojas de bijao.</p></div>
+                          <div class="flip-hint">Pasa el cursor &#10227;</div>
+                        </div>
+                        <div class="flip-back">
+                          <h4>Hallaca de Platano Verde</h4>
+                          <p>Patrimonio cultural local. Plato insignia del Municipio Colon y la zona del Sur del Lago.</p>
+                          <button class="flip-btn" data-modal-id="plato-hallaca">Ver Detalles &#8594;</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flip-card">
+                      <div class="flip-inner">
+                        <div class="flip-front">
+                          <div class="flip-img"><img src="moñongo1.jpg" alt="El Moñongo" loading="lazy"></div>
+                          <div class="flip-body"><h4>El Moñongo</h4><p>Tequeno gigante relleno de platano maduro, queso blanco, carne mechada y jamon.</p></div>
+                          <div class="flip-hint">Pasa el cursor &#10227;</div>
+                        </div>
+                        <div class="flip-back">
+                          <h4>El Moñongo</h4>
+                          <p>Una creacion gastronomica monumental muy popular en la zona del Sur del Lago.</p>
+                          <button class="flip-btn" data-modal-id="plato-monongo">Ver Detalles &#8594;</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flip-card">
+                      <div class="flip-inner">
+                        <div class="flip-front">
+                          <div class="flip-img"><img src="toston1.jpg" alt="Tostones y patacones" loading="lazy"></div>
+                          <div class="flip-body"><h4>Tostones y Patacones</h4><p>Platano verde frito, aplastado y vuelto a freir. Con queso criollo y salsas.</p></div>
+                          <div class="flip-hint">Pasa el cursor &#10227;</div>
+                        </div>
+                        <div class="flip-back">
+                          <h4>Tostones y Patacones</h4>
+                          <p>Base fundamental de la dieta del colones y zuliano. Crujiente y delicioso.</p>
+                          <button class="flip-btn" data-modal-id="plato-patacones">Ver Detalles &#8594;</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flip-card">
+                      <div class="flip-inner">
+                        <div class="flip-front">
+                          <div class="flip-img"><img src="carne1.jpg" alt="Carne en vara" loading="lazy"></div>
+                          <div class="flip-body"><h4>Carne en Vara</h4><p>Cortes de res de la zona ganadera, asados a la lena y servidos con yuca fresca.</p></div>
+                          <div class="flip-hint">Pasa el cursor &#10227;</div>
+                        </div>
+                        <div class="flip-back">
+                          <h4>Carne en Vara</h4>
+                          <p>Reflejo directo de la potencia pecuaria del municipio Colon. Tradicion ganadera.</p>
+                          <button class="flip-btn" data-modal-id="plato-carne-vara">Ver Detalles &#8594;</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flip-card">
+                      <div class="flip-inner">
+                        <div class="flip-front">
+                          <div class="flip-img"><img src="pesacao1.jpg" alt="Pescado de rio frito" loading="lazy"></div>
+                          <div class="flip-body"><h4>Pescado de Rio Frito</h4><p>Bocachico o manamana fritos, capturados en los rios locales y acompañados con tostones.</p></div>
+                          <div class="flip-hint">Pasa el cursor &#10227;</div>
+                        </div>
+                        <div class="flip-back">
+                          <h4>Pescado de Rio Frito</h4>
+                          <p>Especialidad gastronomica ligada a las cuencas del Rio Escalante y el Lago de Maracaibo.</p>
+                          <button class="flip-btn" data-modal-id="plato-pescado">Ver Detalles &#8594;</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="carousel" style="margin-top:24px;">
+                  <div class="carousel-head">
+                    <h3>Preparaciones <span class="italic">Especiales y Dulces</span></h3>
+                    <div class="carousel-nav">
+                      <button class="carousel-prev">&#10094;</button>
+                      <button class="carousel-next">&#10095;</button>
+                    </div>
+                  </div>
+                  <div class="carousel-track">
+                    <div class="flip-card">
+                      <div class="flip-inner">
+                        <div class="flip-front">
+                          <div class="flip-img"><img src="coco1.jpg" alt="Comidas en coco" loading="lazy"></div>
+                          <div class="flip-body"><h4>Comidas en Coco</h4><p>Guisos de carne, pescado o aves cocinados con leche de coco espesa y especias.</p></div>
+                          <div class="flip-hint">Pasa el cursor &#10227;</div>
+                        </div>
+                        <div class="flip-back">
+                          <h4>Comidas en Coco</h4>
+                          <p>Platos caracteristicos del estado Zulia aplicados a la cocina del Sur del Lago.</p>
+                          <button class="flip-btn" data-modal-id="plato-comidas-coco">Ver Detalles &#8594;</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flip-card">
+                      <div class="flip-inner">
+                        <div class="flip-front">
+                          <div class="flip-img"><img src="queso.jpg" alt="Queso de mano y de año" loading="lazy"></div>
+                          <div class="flip-body"><h4>Queso de Mano y Queso de Año</h4><p>Lacteos frescos y madurados producidos por la fuerte actividad ganadera del Municipio Colon.</p></div>
+                          <div class="flip-hint">Pasa el cursor &#10227;</div>
+                        </div>
+                        <div class="flip-back">
+                          <h4>Quesos Locales</h4>
+                          <p>Derivados lacteos de excelencia gracias a la elevada produccion ganadera del municipio.</p>
+                          <button class="flip-btn" data-modal-id="plato-quesos">Ver Detalles &#8594;</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flip-card">
+                      <div class="flip-inner">
+                        <div class="flip-front">
+                          <div class="flip-img"><img src="limon1.jpg" alt="Dulce de limonson" loading="lazy"></div>
+                          <div class="flip-body"><h4>Dulce de Limonson</h4><p>Postre tradicional en almibar elaborado artisticamente con la corteza de este citrico gigante.</p></div>
+                          <div class="flip-hint">Pasa el cursor &#10227;</div>
+                        </div>
+                        <div class="flip-back">
+                          <h4>Dulce de Limonson</h4>
+                          <p>Una joya dulcera de la region del Sur del Lago. Postre artesanal tradicional.</p>
+                          <button class="flip-btn" data-modal-id="plato-limonson">Ver Detalles &#8594;</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flip-card">
+                      <div class="flip-inner">
+                        <div class="flip-front">
+                          <div class="flip-img"><img src="majarete1.jpg" alt="Majarete tradicional" loading="lazy"></div>
+                          <div class="flip-body"><h4>Majarete</h4><p>Dulce cremoso a base de maiz, leche de coco, papelon y canela molida.</p></div>
+                          <div class="flip-hint">Pasa el cursor &#10227;</div>
+                        </div>
+                        <div class="flip-back">
+                          <h4>Majarete</h4>
+                          <p>Dulce criollo y tradicional. Postre emblematico de consistencia similar a un flan o natilla.</p>
+                          <button class="flip-btn" data-modal-id="plato-majarete">Ver Detalles &#8594;</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="acc-item reveal reveal-d1">
+              <button class="acc-btn">Restaurantes y Locales <span class="acc-icon">&#9660;</span></button>
+              <div class="acc-content">
+                <div class="carousel" style="margin-top:18px;">
+                  <div class="carousel-head">
+                    <h3>Donde <span class="italic">Comer</span></h3>
+                    <div class="carousel-nav">
+                      <button class="carousel-prev">&#10094;</button>
+                      <button class="carousel-next">&#10095;</button>
+                    </div>
+                  </div>
+                  <div class="carousel-track">
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="julia1.jpg" alt="Julia's Restobar-Coffee" loading="lazy"></div>
+                      <div class="bento-body"><h4>Julia's Restobar-Coffee</h4><p>4.8 (24) - Restaurante y Cafe<br>232R+3JV, Av. Bolivar<br>Consumo en el lugar y para llevar</p>
+                        <button class="bento-btn" data-modal-id="rest-julias">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="doña1.jpg" alt="El rincon de Doña Barbara" loading="lazy"></div>
+                      <div class="bento-body"><h4>El Rincon de Doña Barbara</h4><p>4.6 (1K) - Parrillas y Especialidades<br>Santa Rita, Zulia<br>"Excelentes parrillas, muy buenas al igual que sus salsas."</p>
+                        <button class="bento-btn" data-modal-id="rest-dona-barbara">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="gana2.jpg" alt="Gana Bistro" loading="lazy"></div>
+                      <div class="bento-body"><h4>Gana Bistro</h4><p>4.4 (100) - Comida Zuliana e Internacional<br>X3XP+HWH<br>"Buen nivel de servicio y seleccion de comida."</p>
+                        <button class="bento-btn" data-modal-id="rest-gana-bistro">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="club1.jpg" alt="Club campestre el Rucio Moro" loading="lazy"></div>
+                      <div class="bento-body"><h4>Club Campestre El Rucio Moro</h4><p>4.4 (66) - Restaurante Campestre<br>X4J2+M9F<br>"La comida es excelente, un ambiente al aire libre."</p>
+                        <button class="bento-btn" data-modal-id="rest-rucio-moro">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="andino1.jpg" alt="Andinito" loading="lazy"></div>
+                      <div class="bento-body"><h4>Andinito</h4><p>4.5 (52) - Restaurante<br>Av. 8<br>Autoservicio, pedidos desde el automovil, entrega sin contacto</p>
+                        <button class="bento-btn" data-modal-id="rest-andinito">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="espagueton1.jpg" alt="Espagueton Restaurant" loading="lazy"></div>
+                      <div class="bento-body"><h4>Espagueton Restaurant</h4><p>4.8 (23) - Ideal para Familias<br>235P+RX9<br>Consumo en el lugar, retiros en la puerta, entrega sin contacto</p>
+                        <button class="bento-btn" data-modal-id="rest-espagueton">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="patacon.jpg" alt="Patacon Express" loading="lazy"></div>
+                      <div class="bento-body"><h4>Patacon Express</h4><p>4.4 (151) - $5-10 - Especialidades en Patacones<br>X3VP+RR9, Unnamed Road<br>"Uno de los mejores lugares de Santa Barbara del Zulia."</p>
+                        <button class="bento-btn" data-modal-id="rest-patacan-express">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="aquiles1.jpg" alt="PaQueAquiles" loading="lazy"></div>
+                      <div class="bento-body"><h4>PaQueAquiles</h4><p>4.3 (59) - Pizzeria<br>San Carlos del Zulia, Zulia<br>Consumo en el lugar, para llevar, entrega a domicilio</p>
+                        <button class="bento-btn" data-modal-id="rest-paqueaquiles">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="alex1.jpg" alt="Alex's Restobar" loading="lazy"></div>
+                      <div class="bento-body"><h4>Alex's Restobar</h4><p>5.0 (1) - Comida Rapida y Bebidas<br>X3XP+HPH<br>Consumo en el lugar y para llevar</p>
+                        <button class="bento-btn" data-modal-id="rest-alexs">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="ciego1.jpg" alt="Ciego Grill C.A" loading="lazy"></div>
+                      <div class="bento-body"><h4>Ciego Grill C.A</h4><p>4.5 (152) - Parrillada Industrial<br>5148, Santa Barbara del Zulia<br>"Las mejores parrillas de Santa Barbara, recomendado 1000%."</p>
+                        <button class="bento-btn" data-modal-id="rest-ciego-grill">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="ricas1.jpg" alt="RICAS" loading="lazy"></div>
+                      <div class="bento-body"><h4>RICAS</h4><p>4.7 (35) - Bufé de Dulces y Reposteria<br>11 Bis, Santa Barbara del Zulia<br>Consumo en el lugar y para llevar</p>
+                        <button class="bento-btn" data-modal-id="rest-ricas">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="dulce1.jpg" alt="Dulce estacion" loading="lazy"></div>
+                      <div class="bento-body"><h4>Dulce Estacion</h4><p>4.8 (13) - Postres y Heladeria<br>Santa Barbara del Zulia, Zulia<br>Consumo en el lugar, auto-servicio, entrega sin contacto</p>
+                        <button class="bento-btn" data-modal-id="rest-dulce-estacion">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    
+                    
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="preferida1.jpg" alt="Bodega Mi Preferida" loading="lazy"></div>
+                      <div class="bento-body"><h4>Comercializadora y Bodega Mi Preferida C.A.</h4><p>5.0 (13) - Bodega y Viveres<br>Frente/Diagonal a la Ford, Av. 8</p>
+                        <button class="bento-btn" data-modal-id="rest-mi-preferida">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                    <article class="bento-card">
+                      <div class="bento-img"><img src="salchi1.jpg" alt="Salchiburger" loading="lazy"></div>
+                      <div class="bento-body"><h4>Salchiburger</h4><p>4.7 (3) - Comida Rapida<br>San Carlos del Zulia, Zulia<br>Desayunos y Comida Rapida Nocturna</p>
+                        <button class="bento-btn" data-modal-id="rest-salchiburger">Ver Mas Detalles &#8594;</button></div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+     SECCIÓN ALOJAMIENTO — BENTO GRID
+     Sección estructurada en una retícula asimétrica (Bento Grid)
+     que organiza la oferta hotelera y de hospedaje en el Municipio Colón.
+     Permite alternar mediante subpaneles entre Hoteles Principales y Opciones Alternativas.
+     ========================================== -->
+    <section id="alojamiento" class="page-section">
+      <div class="section-wrap">
+        <div class="container">
+          
+          <!-- Encabezado de la sección -->
+          <div class="section-head reveal">
+            <span class="eyebrow">Donde quedarse</span>
+            <h2>Alojamiento y <span class="italic">Hospedaje</span></h2>
+            <p>Los hoteles de Santa Barbara del Zulia ofrecen alternativas comodas tanto para viajes de negocios como de turismo en la region del Sur del Lago.</p>
+          </div>
+
+          <!-- BARRA DE FILTROS (Botones de Píldora)
+               Alterna la visibilidad entre los subpaneles de alojamiento mediante JavaScript (data-sub) -->
+          <div class="filter-bar reveal reveal-d1">
+            <button class="filter-pill active" data-sub="aloj-principales">&#11088; Hoteles Principales</button>
+            <button class="filter-pill" data-sub="aloj-alternativos">&#127979; Opciones Alternativas</button>
+          </div>
+
+          <!-- ==========================================
+               SUB-PANEL 1: HOTELES PRINCIPALES
+               Distribución en cuadrícula Bento con tarjetas de distintos tamaños.
+               ========================================== -->
+          <div id="aloj-principales" class="sub-panel active">
+            <div class="bento-grid">
+              
+              <!-- Tarjeta Bento Destacada (Large): Hotel Bolívar -->
+              <article class="bento-card large reveal">
+                <span class="bento-badge">3 Estrellas</span>
+                <div class="bento-img"><img src="hotel bolivar1.webp" alt="Hotel Bolivar" loading="lazy"></div>
+                <div class="bento-body">
+                  <h4>Hotel Bolivar</h4>
+                  <p>Ubicado de forma estrategica en plena Avenida Bolivar. Calificado con 3 estrellas y con un reconocido servicio de restaurante.</p>
+                  <button class="bento-btn" data-modal-id="aloj-bolivar">Ver Detalles &#8594;</button>
+                </div>
+              </article>
+
+              <!-- Tarjeta Bento Estándar: Hotel El Manantial -->
+              <article class="bento-card reveal reveal-d1">
+                <div class="bento-img"><img src="manantial1.webp" alt="Hotel El Manantial" loading="lazy"></div>
+                <div class="bento-body">
+                  <h4>Hotel El Manantial</h4>
+                  <p>Situado en el Sector 18 de Octubre. Cuenta con aire acondicionado, TV, estacionamiento y ambiente familiar libre de humo y licores.</p>
+                  <button class="bento-btn" data-modal-id="aloj-manantial">Ver Detalles &#8594;</button>
+                </div>
+              </article>
+
+              <!-- Tarjeta Bento Estándar: The View Hotel SB -->
+              <article class="bento-card reveal reveal-d2">
+                <div class="bento-img"><img src="the1.webp" alt="The View Hotel SB" loading="lazy"></div>
+                <div class="bento-body">
+                  <h4>The View Hotel SB</h4>
+                  <p>Ofrece habitaciones dobles y triples en espacios modernos acompañados de un area de bistro bar lounge.</p>
+                  <button class="bento-btn" data-modal-id="rest-the-view">Ver Detalles &#8594;</button>
+                </div>
+              </article>
+
+              <!-- Tarjeta Bento Ancha (Wide): Hotel Montecarlo -->
+              <article class="bento-card wide reveal">
+                <div class="bento-img"><img src="monte1.jpg" alt="Hotel Montecarlo" loading="lazy"></div>
+                <div class="bento-body">
+                  <h4>Hotel Montecarlo</h4>
+                  <p>Una opcion tradicional para viajeros, equipada con restaurante y bar propio en plena zona urbana.</p>
+                  <button class="bento-btn" data-modal-id="aloj-montecarlo">Ver Detalles &#8594;</button>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <!-- ==========================================
+               SUB-PANEL 2: OPCIONES ALTERNATIVAS
+               Posadas y hoteles ejecutivos alternativos.
+               ========================================== -->
+          <div id="aloj-alternativos" class="sub-panel">
+            <div class="bento-grid">
+              
+              <!-- Tarjeta Bento: Hotel El Rincón Andino -->
+              <article class="bento-card reveal">
+                <div class="bento-img"><img src="images/hotel-rincon-andino.jpg" alt="Hotel El Rincon Andino" loading="lazy"></div>
+                <div class="bento-body">
+                  <h4>Hotel El Rincon Andino</h4>
+                  <p>Alternativa confortable valorada por su tranquilidad. Dispone de planta electrica, estacionamiento y cena a la habitacion.</p>
+                  <button class="bento-btn" data-modal-id="aloj-rincon-andino">Ver Detalles &#8594;</button>
+                </div>
+              </article>
+
+              <!-- Tarjeta Bento: Hotel Génesis Suite -->
+              <article class="bento-card reveal reveal-d1">
+                <div class="bento-img"><img src="images/hotel-genesis-suite.jpg" alt="Hotel Genesis Suite" loading="lazy"></div>
+                <div class="bento-body">
+                  <h4>Hotel Genesis Suite</h4>
+                  <p>Ubicado en el Sector Calle 5 de Julio. Ideal para viajes de trabajo, cuenta con planta electrica, Wi-Fi y estacionamiento vigilado.</p>
+                  <button class="bento-btn" data-modal-id="aloj-genesis-suite">Ver Detalles &#8594;</button>
+                </div>
+              </article>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================
+     PANEL LATERAL DESLIZANTE (DRAWER / MODAL)
+     Componente emergente que se despliega desde un lateral 
+     para mostrar información detallada al hacer clic en los botones
+     de los destinos, platos o alojamientos.
+     ========================================== -->
+  <!-- Capa oscura de fondo (overlay) que bloquea la interacción con la página mientras el panel está abierto -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  
+  <!-- Contenedor principal del panel deslizante -->
+  <aside class="drawer" id="drawer">
+    <!-- Encabezado del panel: Título dinámico y botón para cerrar -->
+    <div class="drawer-header">
+      <h3 id="drawerTitle"></h3>
+      <button class="drawer-close" id="drawerClose" aria-label="Cerrar">&times;</button>
+    </div>
+    <!-- Cuerpo del panel: Aquí JavaScript inyecta dinámicamente el contenido/detalles -->
+    <div class="drawer-body" id="drawerBody"></div>
+  </aside>
+
+  <!-- ==========================================
+     PIE DE PÁGINA (FOOTER)
+     Cierre de la página con divisor en forma de ola SVG y derechos de autor.
+     ========================================== -->
+  <footer class="footer">
+    <!-- Divisor decorativo animado con forma de ola -->
+    <div class="footer-wave">
+      <svg viewBox="0 0 1200 50" preserveAspectRatio="none">
+        <path d="M0,50 C300,0 900,50 1200,10 L1200,50 Z"></path>
+      </svg>
+    </div>
+    
+    <!-- Contenido principal del pie de página -->
+    <div class="container">
+      <div class="footer-brand">Turismo Colon</div>
+      <p>&copy; esta pagina fue creada con fines educativos</p>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    /* ==========================================
+   DATOS DEL DRAWER (modalData)
+   Objeto central estructurado y organizado por categorías 
+   (Destinos Turísticos, Universidad UNESUR, Industrias, Plazas y Parques, 
+   Gastronomía y Alojamientos) para alimentar dinámicamente el panel lateral (drawer).
+   ========================================== */
+const modalData = {
+
+  /* ==========================================
+     1. DESTINOS: CATEDRALES Y MONUMENTOS
+     ========================================== */
+  'catedral-santa-barbara': { 
+    title: 'Catedral San Carlos del Zulia', 
+    img: 'san carlos2.jpg',
+    text: `CREACION DE LA PARROQUIA\nElevada a Catedral tras la creacion de la Diocesis de El Vigia - San Carlos del Zulia. Constituye la sede episcopal y el templo religioso de mayor jerarquia en el Municipio Colon.\n\nUBICACION Y ENTORNO GEOGRAFICO\nDireccion: Av. Bolivar, frente a la Plaza Bolivar, Santa Barbara del Zulia, Municipio Colon, Zulia.\nGeografia Local: Emplazada en la planicie aluvial del Sur del Lago de Maracaibo, cercana a la cuenca del Rio Escalante.\nDatos Importantes: Su arquitectura imponente domina el centro historico y urbano de la ciudad.\n\nFIESTAS PATRONALES Y TRADICIONES\nFiestas Patronales: Celebradas cada 4 de diciembre en honor a Santa Barbara.\nTradiciones: Procesiones, solemnes eucaristias, repique de campanas y manifestaciones culturales gaiteras regionales.\n\nINFORMACION DE SERVICIO\nComunidad: Sede de grupos parroquiales, catequesis, pastoral social y movimientos juveniles.\nServicios e Instalaciones: Despacho parroquial, altar mayor, confesionarios, aire acondicionado y acceso para personas con movilidad reducida.` 
+  },
+  
+  'iglesia-san-carlos': { 
+    title: 'Iglesia Santa Barbara', 
+    img: 'iglesia2.jpg',
+    text: `CREACION DE LA PARROQUIA\nFundada historicamente junto al asentamiento poblacional de San Carlos del Zulia, consolidandose como centro espiritual fundamental de la zona.\n\nUBICACION Y ENTORNO GEOGRAFICO\nDireccion: Casco central de San Carlos del Zulia, contiguo a la ribera del Rio Escalante.\nGeografia Local: Terreno plano caracteristico del valle del Escalante, con vegetacion tropical de la zona Sur del Lago.\nDatos Importantes: Estrechamente ligada al desarrollo fluvial e historico que conectaba al Zulia con los Andes venezolanos.\n\nFIESTAS PATRONALES Y TRADICIONES\nFiestas Patronales: 4 de noviembre en honor a San Carlos Borromeo.\nTradiciones: Misa patronal, recorridos comunitarios con la imagen del santo y actos culturales tradicionales en la plaza local.\n\nINFORMACION DE SERVICIO\nComunidad: Atiende a las familias y sectores populares del margen oeste del rio.\nServicios e Instalaciones: Celebracion de sacramentos (bautizos, bodas), catequesis comunitaria y atencion de despacho pastoral.` 
+  },
+
+  'rio-escalante': { 
+    title: 'Rio Escalante de Santa Barbara del Zulia', 
+    img: 'rio2.jpg', 
+    text: `IMPORTANCIA GEOGRAFICA E HISTORICA\nEl Rio Escalante es la principal cuenca fluvial del municipio Colon. Fluye desde los Andes venezolanos hasta desembocar en el Lago de Maracaibo, dividiendo geograficamente las poblaciones hermanas de Santa Barbara y San Carlos del Zulia.\n\nACTIVIDAD ECONOMICA Y TURISTICA\nTransporte Fluvial: Historicamente fue la gran via de salida del cafe, cacao y productos agricolas hacia el puerto de Maracaibo.\nPaisaje Natural: Riberas rodeadas de vegetacion exuberante, ideales para el avistamiento de aves e itinerarios turisticos acuaticos hacia la cuenca del Catatumbo.` 
+  },
+
+  'paseo-colon': { 
+    title: 'Paseo Colon (Santa Barbara del Zulia)', 
+    img: 'paseo2.jpg',
+    text: `ESPACIO RECREATIVO Y CULTURAL\nUbicado contiguo a la ribera del Rio Escalante en Santa Barbara del Zulia, el Paseo Colon es un boulevard peatonal proyectado para el encuentro ciudadano, el esparcimiento al aire libre y el turismo local.\n\nATRACTIVOS Y ACTIVIDADES\nAreas Verdes y Vista al Rio: Ofrece caminerias iluminadas, bancos de descanso y un mirador privilegiado hacia el cauce del Escalante y el puente de conexion urbana.\nVida Social: Punto habitual para eventos gastronomicos, ferias artesanales, actividades deportivas y paseos familiares durante los fines de semana.` 
+  },
+
+  'teatro-chavez': { 
+    title: 'Teatro Municipal Hugo Rafael Chavez Frias', 
+    img: 'teatro2.jpg', 
+    text: `UBICACION\nAvenida Gran Colombia, Santa Barbara del Zulia, Municipio Colon, Estado Zulia.\n\nUSO PRINCIPAL\nConciertos sinfonicos, obras de teatro, presentaciones de danza y eventos comunitarios organizados a menudo junto a El Sistema (Orquesta Sinfonica y Coro del Nucleo Santa Barbara).\n\nACCESO\nLas entradas para los eventos especiales generalmente se adquieren directamente en la sede del nucleo de musica local o en las taquillas del recinto.` 
+  },
+
+  /* ==========================================
+     2. UNIVERSIDAD NACIONAL EXPERIMENTAL SUR DEL LAGO (UNESUR)
+     ========================================== */
+  'unesur-central': { 
+    title: 'Areas de UNESUR', 
+    images: ['area central1.jpeg', 'area central2.jpeg', 'area central3.jpeg', 'area central4.jpeg', 'area central5.jpeg'], 
+    text: `AREA CENTRAL Y ACCESOS\nZona Delantera: Alberga la fachada institucional, el porton principal de acceso, las areas de recepcion y el paseo peatonal de bienvenida.\nZona Trasera: Conecta directamente con los laboratorios agronomicos, galpones de ensayo y los bloques de aulas de clases.\n\nROL DENTRO DEL CAMPUS\nServir como el eje de circulacion peatonal y punto de encuentro entre estudiantes, docentes y personal administrativo.` 
+  },
+
+  'unesur-biblioteca': { 
+    title: 'Biblioteca Central - UNESUR', 
+    images: ['biblioteca2.jpg', 'biblioteca1.png','biblioteca3.jpeg'], 
+    text: `BIBLIOTECA Y SALAS DE ESTUDIO\nInstalaciones: Espacios climatizados con salas de lectura individual y colectiva, ficheros fisicos y modulos de consulta digital.\nColeccion: Especializada en ciencias agronomicas, medicina veterinaria, agroindustria y administracion.\n\nSERVICIOS DISPONIBLES\nPrestamos circulares en sala, apoyo en investigacion academica e internet para consulta estudiantil.` 
+  },
+
+  'unesur-enfermeria': { 
+    title: 'Area de Enfermeria y Servicio Medico - UNESUR', 
+    images: ['enfermeria1.jpeg', 'enfermeria2.jpeg', 'enfermeria3.jpeg', 'enfermeria4.jpeg'], 
+    text: `SERVICIO DE SALUD ESTUDIANTIL\nAtencion Primaria: Modulo equipado para primeros auxilios, control de signos vitales y atencion de emergencias menores dentro del campus.\nPersonal: Enfermeros calificados y medicos pasantes dispuestos para el bienestar de la comunidad universitaria.\n\nPROGRAMAS\nJornadas de vacunacion, despistaje de salud y charlas de prevencion epidemiologica.` 
+  },
+
+  'unesur-jardineria': { 
+    title: 'Area de Jardineria y Espacios Verdes - UNESUR', 
+    images: ['jardineria1.jpg', 'jardineria2.jpg'], 
+    text: `ENTORNO AMBIENTAL Y PAISAJISMO\nJardines y Viveros: Espacios verdes compuestos por flora autotona del Sur del Lago, senderos arbolados y zonas de descanso sombreadas.\nPracticas Agronomicas: Utilizado adicionalmente como campo experimental para asignaturas de botanica, paisajismo y produccion vegetal.\n\nMANTENIMIENTO\nAreas cuidadas de forma continua por las cuadrillas de mantenimiento ambiental de la universidad.` 
+  },
+
+  /* ==========================================
+     3. PLAZAS Y PARQUES
+     ========================================== */
+  'plaza-bolivar': { 
+    title: 'Plaza Bolivar', 
+    img: 'plaza bolivar2.webp',
+    text: `UBICACION\nEntre las carreras 4 y 5, con calles 11 y 12.\n\nDETALLES\nEs uno de los espacios mas concurridos por los habitantes locales para conversar, pasear y disfrutar de un ambiente tradicional al aire libre cerca de la iglesia principal de la ciudad.` 
+  },
+
+  'plaza-urdaneta': { 
+    title: 'Plaza Rafael Urdaneta', 
+    img: 'plaza Rafael2.jpg',
+    text: `UBICACION\nAvenida Bolivar.\n\nDETALLES\nUn parque urbano muy visitado que cuenta con areas recreativas y fuentes de agua que han sido objeto de trabajos de recuperacion y embellecimiento para el disfrute familiar.` 
+  },
+
+  'plaza-vargas': { 
+    title: 'Plaza Jose Maria Vargas (Plaza del Medico)', 
+    img: 'medico2.jpeg', 
+    text: `UBICACION\nCerca de zonas de servicios de salud en Santa Barbara del Zulia.\n\nDETALLES\nConocida popularmente como la plaza del Medico, destaca por sus labores de mantenimiento, iluminacion y reactivacion de espacios ornamentales.` 
+  },
+
+  
+
+  'parque-cienegas': { 
+    title: 'Parque Nacional Cienagas de Juan Manuel', 
+    img: 'parque2.png',
+    text: `UBICACION\nSuroeste de la cuenca del Lago de Maracaibo, entre los rios Catatumbo y Escalante.\n\nDETALLES\nExtensa reserva natural de cienagas y pantanos de vital importancia ecologica. Es el epicentro geografico del mundialmente famoso fenomeno del Relampago del Catatumbo, ademas de refugio de especies de flora y fauna silvestre de la region.` 
+  },
+
+  /* ==========================================
+     4. INDUSTRIAS Y SECTOR AGROPECUARIO
+     ========================================== */
+  'ind-san-simon': { 
+    title: 'Agropecuaria San Simon', 
+    img: 'san simon1.jpg', 
+    text: `DESCRIPCION Y OPERACION\nEl pilar fundamental del consorcio San Simon. Cuenta con 14 ganaderias situadas en el estado Zulia dedicadas a la cria de ganado vacuno de doble proposito (utilizando razas Brahman, Gyr y Guzera), la comercializacion de ganado en pie y la venta de leche cruda.\n\nPRODUCCION AGRICOLA Y PALMA ACEITERA\nAdicionalmente, constituye una gran productora agricola altamente enfocada en la siembra y cultivo de palma africana aceitera para el sector industrial.` 
+  },
+
+  'ind-genica': { 
+    title: 'Genica del Zulia (Planta Santa Barbara)', 
+    img: 'colona2.jpg', 
+    text: `MODELO DE PRODUCCION INTEGRADA\nAunque opera como una moderna planta industrial, maneja un gigantesco esquema de produccion integrada. Recibe y procesa de forma directa la produccion de cientos de fincas ganaderas de la zona para alimentar su variado portafolio lacteo nacional.\n\nIMPACTO REGIONAL\nRepresenta un motor receptor clave para el pequeno, mediano y grande productor lechero del Sur del Lago.` 
+  },
+
+  'ind-frisulca': { 
+    title: 'Frigorifico Industrial Santa Barbara, S.A. (FIBASA)', 
+    img: 'fibasa2.jpg', 
+    text: `PROCESAMIENTO CARNICO Y CAPACIDAD\nEmpresa medular dentro del sector carnico regional. Funciona como el matadero industrial y centro de beneficio de reses de alta capacidad de la zona.\n\nDISTRIBUCION NACIONAL\nProcesa eficientemente el ganado en pie producido en la region Sur del Lago para el abastecimiento y distribucion masiva de carne hacia las zonas centrales de Venezuela.` 
+  },
+
+  'ind-proseagro': { 
+    title: 'Proseagro, C.A.', 
+    img: 'proseagro2.jpg', 
+    text: `SUMINISTROS Y ATENCION AL CAMPO\nImportante distribuidor de insumos agropecuarios esenciales. Se encarga de proveer medicamentos veterinarios, alimentos balanceados, herramientas operativas y suplementos minerales indispensables para optimizar el rendimiento y la salud del rebano ganadero.\n\nUBICACION INSTITUCIONAL\nUbicada estrategicamente en el Edificio AGANACO.` 
+  },
+
+  'ind-agrollano': { 
+    title: 'Agrollano (Sucursal Santa Barbara)', 
+    img: 'agro2.jpg', 
+    text: `LOGISTICA Y ASISTENCIA TECNICA\nAliado estrategico indispensable para el productor agropecuario de la zona. Funciona como centro de distribucion masiva de fertilizantes, semillas certificadas, agroquimicos de alta calidad y planes de financiamiento tecnico dirigidos a dinamizar el campo del Sur del Lago.` 
+  },
+
+
+  /* ==========================================
+     5. GASTRONOMÍA (PLATOS TÍPICOS Y PRODUCTOS)
+     ========================================== */
+  'plato-hallaca': { 
+    title: 'Hallaca de Platano Verde', 
+    img: 'hallaca1.jpg',
+    text: `PATRIMONIO CULTURAL LOCAL\nPlato insignia del Municipio Colon y la zona del Sur del Lago. Se elabora sustituyendo la tradicional masa de maiz por platano verde rallado y procesado.\n\nPREPARACION E INGREDIENTES\nSe rellena con un sabroso guiso de carnes (res y cerdo), vegetales y condimentos tradicionales, para luego envolverse en hojas de bijao y hervirse.` 
+  },
+
+  'plato-monongo': { 
+    title: 'El Moñongo', 
+    img: 'Moñongo2.jpg',
+    text: `ESPECIALIDAD LOCAL\nUna creacion gastronomica monumental muy popular en la zona.\n\nRELLENO GENEROSO\nConsiste en un tequeno de gran tamano relleno de platano maduro frito, queso blanco fundido, carne mechada sazonada y finas lonjas de jamon.` 
+  },
+
+  'plato-patacones': { 
+    title: 'Tostones y Patacones', 
+    img: 'toston2.jpg',
+    text: `CLASICO ZULIANO\nBase fundamental de la dieta del colones y zuliano.\n\nELABORACION\nPlatano verde cortado, frito, aplastado suavemente y vuelto a freir hasta lograr una textura crujiente. Servido como contorno o plato fuerte, cubierto de queso criollo rallado, ensalada y salsas locales.` 
+  },
+
+  'plato-carne-vara': { 
+    title: 'Carne en Vara', 
+    img: 'carne2.jpg', 
+    text: `TRADICION GANADERA\nReflejo directo de la potencia pecuaria del municipio Colon.\n\nTECNICA DE COCCION\nCortes seleccionados de res insertados en varas de madera asadas lentamente a las brasas de lena. Servidos tradicionalmente con yuca cocida, queso de año y guasacaca.` 
+  },
+
+  'plato-pescado': { 
+    title: 'Pescado de Rio Frito', 
+    img: 'pesacao2.jpg',
+    text: `SAJOR FLUVIAL\nEspecialidad gastronomica ligada a las cuencas del Rio Escalante y el Lago de Maracaibo.\n\nESPECIES Y ACOMPAÑAMIENTO\nSe elabora principalmente con especies locales frescas como Bocachico o Manamana, sazonados, empanizados y fritos, acompañados con tostones de platano verde y ensalada.` 
+  },
+
+  'plato-comidas-coco': { 
+    title: 'Comidas en Coco', 
+    img: 'coco1.jpg', 
+    text: `HERENCIA CULINARIA\nPlatos caracteristicos del estado Zulia aplicados a la cocina del Sur del Lago.\n\nELABORACION\nCortes de carne de res, chivo, pescado de rio o aves cocinados a fuego lento dentro de una densa salsa a base de leche de coco natural, verduras y especias.` 
+  },
+
+  'plato-quesos': { 
+    title: 'Queso de Mano y Queso de Año', 
+    img: 'queso2.jpg',  
+    text: `DERIVADOS LACTEOS DE EXCELENCIA\nGracias a la elevada produccion ganadera del Municipio Colon, los productos lacteos destacan por su calidad nacional.\n\nVARIEDADES\nQueso de Mano: Queso fresco hilado de textura suave y jugosa.\nQueso de Año: Queso madurado, salado y firme, ideal para rallar sobre patacones, arepas y carnes.` 
+  },
+
+  'plato-limonson': { 
+    title: 'Dulce de Limonsón', 
+    img: 'limon2.jpg', 
+    text: `POSTRE ARTESANAL TRADICIONAL\nUna joya dulcera de la region del Sur del Lago.\n\nPROCESO\nElaborado utilizando la cascara gruesa del limonson (citrico de gran tamano), la cual se endulza, se cocina durante horas en almibar de papelon y canela hasta lograr una consistencia suave y cristalina.` 
+  },
+
+  'plato-majarete': { 
+    title: 'Majarete', 
+    img: 'majarete1.jpg', 
+    text: `DULCE CRIOLLO Y TRADICIONAL\nPostre emblematico de consistencia similar a un flan o natilla.\n\nINGREDIENTES\nPreparado con harina de maiz precocida o maiz tierno, leche de coco concentrada, papelon, una pizca de sal y abundante canela molida en la superficie.` 
+  },
+
+  /* ==========================================
+     6. RESTAURANTES Y LOCALES GASTRONÓMICOS
+     ========================================== */
+  'rest-julias': { 
+    title: "Julia's Restobar-Coffee", 
+    img: 'julia2.jpg', 
+    text: 'Valoracion: 4.8 / 5.0 (24 opiniones)\nTipo: Restaurante y Cafeteria\nDireccion: 232R+3JV, Av. Bolivar, Santa Barbara del Zulia.\nModalidad: Consumo en el lugar y servicio para llevar.' 
+  },
+
+  'rest-dona-barbara': { 
+    title: "El Rincon de Doña Barbara", 
+    img: 'doña2.jpg', 
+    text: `Valoracion: 4.6 / 5.0 (Mas de 1,000 opiniones)\nTipo: Restaurante de Parrillas\nDireccion: Santa Rita, Zulia.\nResena destacada: "Excelentes parrillas, muy buenas al igual que sus salsas y contornos."` 
+  },
+
+  'rest-gana-bistro': { 
+    title: "Gana Bistro", 
+    img: 'gana1.jpg',  
+    text: 'Valoracion: 4.4 / 5.0 (100 opiniones)\nTipo: Comida Zuliana e Internacional\nCodigo Plus: X3XP+HWH\nResena destacada: "Buen nivel de servicio y una variada seleccion de gastronomia local e internacional."' 
+  },
+
+  'rest-rucio-moro': { 
+    title: "Club Campestre El Rucio Moro", 
+    img: 'club2.jpg', 
+    text: 'Valoracion: 4.4 / 5.0 (66 opiniones)\nTipo: Restaurante Campestre y Recreativo\nCodigo Plus: X4J2+M9F\nResena destacada: "La comida es excelente, lugar amplio e ideal para compartir en familia."' 
+  },
+
+  'rest-andinito': { 
+    title: "Andinito", 
+    img: 'andino2.jpg', 
+    text: 'Valoracion: 4.5 / 5.0 (52 opiniones)\nTipo: Restaurante\nDireccion: Av. 8, Santa Barbara del Zulia.\nServicios: Consumo en el lugar, pedidos desde el automovil y entrega sin contacto.' 
+  },
+
+  'rest-espagueton': { 
+    title: "Espagueton Restaurant", 
+    img: 'espagueton2.jpg',
+    text: 'Valoracion: 4.8 / 5.0 (23 opiniones)\nTipo: Restaurante Familiar / Pastas y Variedades\nCodigo Plus: 235P+RX9\nServicios: Consumo en el lugar, retiros en la puerta y entrega sin contacto.' 
+  },
+
+  'rest-patacan-express': { 
+    title: "Patacon Express", 
+    img: 'patacon1.jpg', 
+    text: 'Valoracion: 4.4 / 5.0 (151 opiniones)\nRango de Precios: $5 - $10\nTipo: Especialidades en Patacones y Comida Rapida Zuliana\nUbicacion: X3VP+RR9, Unnamed Road, Santa Barbara del Zulia.\nResena destacada: "Uno de los mejores lugares de Santa Barbara del Zulia."' 
+  },
+
+  'rest-paqueaquiles': { 
+    title: "PaQueAquiles", 
+    img: 'aquiles2.jpg', 
+    text: 'Valoracion: 4.3 / 5.0 (59 opiniones)\nTipo: Pizzeria y Comida Rapida\nUbicacion: San Carlos del Zulia, Zulia.\nServicios: Consumo en el lugar, para llevar y entrega a domicilio.' 
+  },
+
+  'rest-alexs': { 
+    title: "Alex's Restobar", 
+    img: 'alex2.jpg', 
+    text: 'Valoracion: 5.0 / 5.0 (1 opinion)\nTipo: Comida Rapida y Restobar\nCodigo Plus: X3XP+HPH\nModalidad: Consumo en el lugar y servicio para llevar.' 
+  },
+
+  'rest-ciego-grill': { 
+    title: "Ciego Grill C.A", 
+    img: 'ciego2.jpg', 
+    text: 'Valoracion: 4.5 / 5.0 (152 opiniones)\nTipo: Restaurante / Parrillada\nUbicacion: Sector 5148, Santa Barbara del Zulia.\nResena destacada: "Las mejores parrillas de Santa Barbara, recomendado 1000%."' 
+  },
+
+  'rest-ricas': { 
+    title: "RICAS", 
+    img: 'ricas2.jpg',
+    text: 'Valoracion: 4.7 / 5.0 (35 opiniones)\nTipo: Bufé de Dulces, Reposteria y Cafeteria\nUbicacion: Calle 11 Bis, Santa Barbara del Zulia.\nModalidad: Consumo en el lugar y servicio para llevar.' 
+  },
+
+  'rest-dulce-estacion': { 
+    title: "Dulce Estacion", 
+    img: 'dulce2.jpg', 
+    text: 'Valoracion: 4.8 / 5.0 (13 opiniones)\nTipo: Heladeria, Postres y Snacks\nUbicacion: Santa Barbara del Zulia, Zulia.\nServicios: Consumo en el lugar, pedidos desde el automovil y entrega sin contacto.' 
+  },
+
+
+
+  'rest-mi-preferida': { 
+    title: "Comercializadora y Bodega Mi Preferida C.A.", 
+    img: 'preferida2.jpg', 
+    text: 'Valoracion: 5.0 / 5.0 (13 opiniones)\nTipo: Bodega, Viveres y Comercializadora\nUbicacion: Frente/Diagonal a la concesionaria Ford, Av. 8, Santa Barbara del Zulia.' 
+  },
+
+  'rest-salchiburger': { 
+    title: "Salchiburger", 
+    img: 'salchi2.jpg', 
+    text: 'Valoracion: 4.7 / 5.0 (3 opiniones)\nTipo: Comida Rapida y Desayunos\nUbicacion: San Carlos del Zulia, Zulia.\nServicio desde tempranas horas de la mañana y jornada nocturna.' 
+  },
+
+  /* ==========================================
+     7. ALOJAMIENTO Y HOSPEDAJE
+     ========================================== */
+  'aloj-bolivar': { 
+    title: 'Hotel Bolivar', 
+    img: 'hotel bolivar2.webp', 
+    text: `UBICACION\nAvenida Bolivar, Santa Barbara del Zulia.\n\nCARACTERISTICAS\nCalificacion: 3 estrellas.\nUbicacion estrategica en el centro comercial de la ciudad.\nCuenta con servicio de restaurante interno con platos de la cocina local e internacional.` 
+  },
+
+  'aloj-manantial': { 
+    title: 'Hotel El Manantial', 
+    img:  'manantial2.webp',
+    text: `UBICACION\nSector 18 de Octubre, Santa Barbara del Zulia.\n\nSERVICIOS Y POLITICAS\nEquipado con aire acondicionado, television por cable y estacionamiento privado.\nPromueve un ambiente familiar de descanso y tranquilidad.\nMantiene politicas: espacio libre de humo y venta de licores.` 
+  },
+
+  'rest-the-view': { 
+    title: "The View Hotel & Restaurant", 
+    img: 'the2.webp', 
+    text: 'Valoracion: 4.3 / 5.0 (211 opiniones)\nTipo: Hotel y Restaurante Internacional\nCodigo Plus: X3XQ+R7H, Santa Barbara del Zulia.\nResena destacada: "Muy buen hotel y restaurante en Santa Barbara, lo recomiendo 100%."' 
+  },
+
+  'aloj-montecarlo': { 
+    title: 'Hotel Restaurante Monte Carlo, C.A', 
+    img: 'monte2.jfif', 
+    text: `UBICACION\nAvenida Bolivar, Santa Barbara del Zulia.\n\nDETALLES\nEstablecimiento tradicional para comerciantes y visitantes.\nDispone de restaurante y bar propio dentro de las instalaciones.` 
+  },
+
+  'aloj-rincon-andino': { 
+    title: 'Hotel El Rincon Andino', 
+    img: 'images/hotel-rincon-andino.jpg', 
+    text: `UBICACION\nSanta Barbara del Zulia.\n\nVENTAJAS RELEVANTES\nDispone de planta electrica para garantizar suministro de energia continuo.\nEstacionamiento privado y seguro.\nOfrece servicio de cena directamente en la habitacion.` 
+  },
+
+  'aloj-genesis-suite': { 
+    title: 'Hotel Genesis Suite', 
+    img: 'images/hotel-genesis-suite.jpg', 
+    text: `UBICACION\nSector Calle 5 de Julio, Santa Barbara del Zulia.\n\nPERFIL EJECUTIVO\nDiseñado especialmente para viajes de negocios y estadías cortas.\nCuenta con planta electrica, excelente conexion Wi-Fi, aire acondicionado y estacionamiento vigilado.` 
+  },
+
+
+
+};
+
+    /* ====== LOADING SCREEN ====== */
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1600);
+    });
+
+    /* ====== CURSOR PERSONALIZADO ====== */
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorRing = document.querySelector('.cursor-ring');
+    let mx=0, my=0, rx=0, ry=0;
+    document.addEventListener('mousemove', e => {
+      mx=e.clientX; my=e.clientY;
+      cursorDot.style.transform = `translate(${mx-3.5}px, ${my-3.5}px)`;
+    });
+    function animateRing() {
+      rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
+      cursorRing.style.transform = `translate(${rx-18}px, ${ry-18}px)`;
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+    document.querySelectorAll('a,button,.hero-dot,.flip-card,.bento-card,.dest-chip,.filter-pill').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('hover-active'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover-active'));
+    });
+
+    /* ====== PARTÍCULAS ====== */
+    const pbg = document.getElementById('particles-bg');
+    const pcolors = ['#c4582b','#d4a017','#e07a4f','#f0c04a'];
+    for (let i=0; i<26; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const sz = Math.random()*12+4;
+      p.style.width = sz+'px'; p.style.height = sz+'px';
+      p.style.background = pcolors[Math.floor(Math.random()*pcolors.length)];
+      p.style.left = Math.random()*100+'%';
+      p.style.animationDuration = (Math.random()*15+10)+'s';
+      p.style.animationDelay = Math.random()*10+'s';
+      p.style.setProperty('--drift', (Math.random()*200-100)+'px');
+      pbg.appendChild(p);
+    }
+
+    /* ====== SCROLL PROGRESS + NAV SCROLLED ====== */
+    const scrollProgress = document.querySelector('.scroll-progress');
+    const floatNav = document.getElementById('floatNav');
+    window.addEventListener('scroll', () => {
+      const st = window.scrollY;
+      const dh = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = (st/dh)*100 + '%';
+      if (st > 30) floatNav.classList.add('scrolled'); else floatNav.classList.remove('scrolled');
+    });
+
+    /* ====== NAVEGACIÓN PRINCIPAL ====== */
+    const navLinks = document.querySelectorAll('.nav-link');
+    const pageSections = document.querySelectorAll('.page-section');
+    function switchPage(id) {
+      pageSections.forEach(s => { s.classList.remove('active'); if (s.id === id) s.classList.add('active'); });
+      navLinks.forEach(l => { l.classList.remove('active'); if (l.getAttribute('href') === '#'+id) l.classList.add('active'); });
+      window.scrollTo({ top:0, behavior:'smooth' });
+      setTimeout(checkReveal, 100);
+    }
+    document.addEventListener('click', e => {
+      const link = e.target.closest('.nav-link');
+      if (link) { e.preventDefault(); switchPage(link.getAttribute('href').replace('#','')); }
+    });
+
+    /* ====== FILTROS (sub-paneles) ====== */
+    document.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-sub');
+        const parent = btn.closest('.page-section');
+        document.querySelectorAll('.filter-pill').forEach(b => { if (b.closest('.page-section')===parent) b.classList.remove('active'); });
+        document.querySelectorAll('.sub-panel').forEach(p => { if (p.closest('.page-section')===parent) p.classList.remove('active'); });
+        btn.classList.add('active');
+        const panel = document.getElementById(target);
+        if (panel) panel.classList.add('active');
+      });
+    });
+
+    /* ====== CHIPS DE DESTINOS ====== */
+    document.querySelectorAll('.dest-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const target = chip.getAttribute('data-target');
+        document.querySelectorAll('.dest-chip').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.dest-detail').forEach(d => d.classList.remove('active'));
+        chip.classList.add('active');
+        const d = document.getElementById(target);
+        if (d) d.classList.add('active');
+      });
+    });
+
+    /* ====== ACORDEONES ====== */
+    document.querySelectorAll('.acc-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('active');
+        const content = btn.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+
+    /* ====== HERO CARRUSEL ====== */
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const heroDots = document.querySelectorAll('.hero-dot');
+    let heroIdx = 0;
+    function showHeroSlide(i) {
+      heroSlides.forEach(s => s.classList.remove('active'));
+      heroDots.forEach(d => d.classList.remove('active'));
+      heroSlides[i].classList.add('active');
+      heroDots[i].classList.add('active');
+      heroIdx = i;
+    }
+    heroDots.forEach(dot => dot.addEventListener('click', () => showHeroSlide(parseInt(dot.getAttribute('data-slide')))));
+    setInterval(() => { heroIdx = (heroIdx+1) % heroSlides.length; showHeroSlide(heroIdx); }, 5000);
+
+    /* ====== CARRUSELES HORIZONTALES ====== */
+    document.querySelectorAll('.carousel').forEach(carousel => {
+      const track = carousel.querySelector('.carousel-track');
+      const prev = carousel.querySelector('.carousel-prev');
+      const next = carousel.querySelector('.carousel-next');
+      if (prev) prev.addEventListener('click', () => track.scrollBy({ left:-320, behavior:'smooth' }));
+      if (next) next.addEventListener('click', () => track.scrollBy({ left:320, behavior:'smooth' }));
+    });
+
+    /* ====== DRAWER (Panel lateral) ====== */
+    const drawer = document.getElementById('drawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const drawerTitle = document.getElementById('drawerTitle');
+    const drawerBody = document.getElementById('drawerBody');
+    const drawerClose = document.getElementById('drawerClose');
+    let drawerSlideIdx = 0;
+    let drawerTotalSlides = 0;
+
+    function updateDrawerGallery(gallery) {
+      gallery.querySelectorAll('img').forEach((img, i) => {
+        img.classList.toggle('active', i === drawerSlideIdx);
+      });
+      const counter = drawerBody.querySelector('.drawer-counter');
+      if (counter && drawerTotalSlides > 1) counter.textContent = `${drawerSlideIdx+1} / ${drawerTotalSlides}`;
+    }
+
+    document.addEventListener('click', e => {
+      const trigger = e.target.closest('[data-modal-id]');
+      if (trigger) {
+        e.preventDefault();
+        const id = trigger.getAttribute('data-modal-id');
+        const info = modalData[id];
+        if (!info) return;
+
+        drawerSlideIdx = 0;
+        const imageList = (info.images && info.images.length > 0) ? info.images : (info.img ? [info.img] : []);
+        drawerTotalSlides = imageList.length;
+
+        let galleryHTML = '';
+        let controlsHTML = '';
+        let counterHTML = '';
+
+        if (imageList.length > 0) {
+          galleryHTML = imageList.map((src, i) =>
+            `<img src="${src}" alt="${info.title}" class="${i===0?'active':''}" loading="lazy">`
+          ).join('');
+          if (imageList.length > 1) {
+            controlsHTML = `<button class="drawer-gallery-btn prev" aria-label="Anterior">&#10094;</button>
+                           <button class="drawer-gallery-btn next" aria-label="Siguiente">&#10095;</button>`;
+            counterHTML = `<div class="drawer-counter">1 / ${imageList.length}</div>`;
+          }
+        }
+
+        drawerTitle.textContent = info.title;
+        drawerBody.innerHTML = `
+          <div class="drawer-gallery-wrap">
+            ${controlsHTML}
+            <div class="drawer-gallery">${galleryHTML}</div>
+          </div>
+          ${counterHTML}
+          <div class="drawer-text">${info.text.replace(/\n/g,'<br>')}</div>
+        `;
+        drawer.classList.add('active');
+        drawerOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      if (e.target.classList.contains('drawer-gallery-btn')) {
+        const wrap = e.target.closest('.drawer-gallery-wrap');
+        const gallery = wrap.querySelector('.drawer-gallery');
+        if (e.target.classList.contains('prev')) {
+          drawerSlideIdx = drawerSlideIdx === 0 ? drawerTotalSlides-1 : drawerSlideIdx-1;
+        } else {
+          drawerSlideIdx = drawerSlideIdx === drawerTotalSlides-1 ? 0 : drawerSlideIdx+1;
+        }
+        updateDrawerGallery(gallery);
+      }
+    });
+
+    function closeDrawer() {
+      drawer.classList.remove('active');
+      drawerOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    drawerClose.addEventListener('click', closeDrawer);
+    drawerOverlay.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+    /* ====== SCROLL REVEAL ====== */
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+    function checkReveal() {
+      revealEls.forEach(el => {
+        if (el.closest('.page-section.active')) revealObserver.observe(el);
+      });
+    }
+    checkReveal();
+
+    /* ====== 3D TILT EN BENTO CARDS ====== */
+    document.querySelectorAll('.bento-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const cx = r.width/2, cy = r.height/2;
+        const rx = ((e.clientY - r.top - cy)/cy) * -5;
+        const ry = ((e.clientX - r.left - cx)/cx) * 5;
+        card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+  // Función genérica para manejar sistemas de pestañas/filtros por sub-paneles
+  function setupFilterBar(filterBarSelector, panelClass) {
+    const filterBars = document.querySelectorAll(filterBarSelector);
+
+    filterBars.forEach(bar => {
+      const buttons = bar.querySelectorAll(".filter-pill");
+
+      buttons.forEach(button => {
+        button.addEventListener("click", function () {
+          // 1. Quitar la clase 'active' de todos los botones de esta barra
+          buttons.forEach(btn => btn.classList.remove("active"));
+          // 2. Añadir la clase 'active' al botón presionado
+          this.classList.add("active");
+
+          // 3. Obtener el ID del sub-panel destino desde el atributo 'data-sub'
+          const targetId = this.getAttribute("data-sub");
+
+          // 4. Buscar el contenedor padre que agrupa los paneles de esta sección
+          const container = bar.closest(".container") || document;
+          const subPanels = container.querySelectorAll("." + panelClass);
+
+          // 5. Ocultar todos los sub-paneles y mostrar solo el seleccionado
+          subPanels.forEach(panel => {
+            panel.classList.remove("active");
+            if (panel.id === targetId) {
+              panel.classList.add("active");
+            }
+          });
+        });
+      });
+    });
+  }
+
+  // Inicializar para la sección de DESTINOS (los botones usan la clase .filter-pill )
+  setupFilterBar("#destinos .filter-bar", "sub-panel");
+
+  // Inicializar para la sección de ALOJAMIENTO
+  setupFilterBar("#alojamiento .filter-bar", "sub-panel");
+});
+</script>
+</body>
+</html>
